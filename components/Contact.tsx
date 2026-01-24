@@ -16,8 +16,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-import { Mail, Phone, MapPin, Send, ShieldCheck, Clock } from "lucide-react";
-import { toast } from "sonner";
+import { Mail, Phone, MapPin, Send, ShieldCheck } from "lucide-react";
+// import { toast } from "sonner";
 const contactItems = [
   {
     icon: Mail,
@@ -37,7 +37,6 @@ const contactItems = [
     val: "2212 Crosby Rd, Valrico, FL 33594",
     href: "https://www.google.com/maps/search/?api=1&query=2212+Crosby+Rd,+Valrico,+FL+33594",
   },
-
 ];
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required"),
@@ -61,17 +60,17 @@ const Contact = () => {
     },
   });
 
-  const onSubmit = async (data: ContactFormData) => {
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate API
-      toast.success("Inquiry Received", {
-        description: "A safety specialist will contact you within 24 hours.",
-      });
-      form.reset();
-    } catch {
-      toast.error("Transmission failed. Please try again.");
-    }
-  };
+  // const onSubmit = async (data: ContactFormData) => {
+  //   try {
+  //     await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate API
+  //     toast.success("Inquiry Received", {
+  //       description: "A safety specialist will contact you within 24 hours.",
+  //     });
+  //     form.reset();
+  //   } catch {
+  //     toast.error("Transmission failed. Please try again.");
+  //   }
+  // };
 
   const isSubmitting = form.formState.isSubmitting;
 
@@ -139,7 +138,7 @@ const Contact = () => {
             <div className="lg:col-span-3 bg-card p-8 md:p-12 text-lg mt-10">
               <Form {...form}>
                 <form
-                  onSubmit={form.handleSubmit(onSubmit)}
+                  // onSubmit={form.handleSubmit(onSubmit)}
                   className="space-y-6">
                   <div className="grid sm:grid-cols-2 gap-6">
                     <FormField
