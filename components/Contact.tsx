@@ -16,8 +16,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-import { Mail, Phone, MapPin, Send, ShieldCheck } from "lucide-react";
-// import { toast } from "sonner";
+import { Mail, Phone, MapPin, Send, ShieldCheck, Clock } from "lucide-react";
+
 const contactItems = [
   {
     icon: Mail,
@@ -38,6 +38,7 @@ const contactItems = [
     href: "https://www.google.com/maps/search/?api=1&query=2212+Crosby+Rd,+Valrico,+FL+33594",
   },
 ];
+
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required"),
   email: z.string().trim().email("Invalid email address"),
@@ -60,67 +61,56 @@ const Contact = () => {
     },
   });
 
-  // const onSubmit = async (data: ContactFormData) => {
-  //   try {
-  //     await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate API
-  //     toast.success("Inquiry Received", {
-  //       description: "A safety specialist will contact you within 24 hours.",
-  //     });
-  //     form.reset();
-  //   } catch {
-  //     toast.error("Transmission failed. Please try again.");
-  //   }
-  // };
-
   const isSubmitting = form.formState.isSubmitting;
 
   return (
     <section
       id="contact"
-      className="py-24 bg-background relative overflow-hidden">
-      {/* Background Decorative Blob */}
-      <div className="absolute -top-24 -right-24 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+      className="relative overflow-hidden bg-background py-16 sm:py-20 md:py-24">
+      {/* subtle background blob */}
+      <div className="absolute -top-24 -right-24 h-72 w-72 sm:h-96 sm:w-96 rounded-full bg-primary/5 blur-3xl" />
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-8xl mx-auto">
-          <div className="grid lg:grid-cols-5 gap-0 rounded-3xl overflow-hidden border border-border shadow-2xl">
-            {/* Left Column: Info (2/5 width) */}
-            <div className="lg:col-span-2 bg-primary p-8 md:p-12 text-primary-foreground flex flex-col justify-between">
+        <div className="mx-auto max-w-6xl">
+          <div className="grid overflow-hidden rounded-3xl border border-border shadow-2xl lg:grid-cols-5">
+            {/* Left: Info */}
+            <div className="lg:col-span-2 bg-primary text-primary-foreground p-6 sm:p-8 md:p-12 flex flex-col justify-between">
               <div>
-                <h2 className="text-3xl md:text-5xl font-bold mb-6 tracking-tight">
-                  Let&apos;s build a <br />
+                <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold tracking-tight">
+                  Let’s build a <br />
                   <span className="text-white/70 italic">safer campus.</span>
                 </h2>
-                <p className="text-primary-foreground/80 text-lg mb-12">
-                  Have questions about our national standards? Our specialists
-                  are ready to provide a guided walkthrough of our certification
-                  process.
+
+                <p className="mt-4 text-primary-foreground/85 text-sm sm:text-base md:text-lg">
+                  Have questions about our standards or certification pathway?
+                  Our specialists can walk you through next steps.
                 </p>
 
-                <div className="space-y-8">
+                {/* Contact items */}
+                <div className="mt-8 space-y-4">
                   {contactItems.map((item, i) => {
                     const Icon = item.icon;
+                    const isMap = item.label === "HQ";
 
                     return (
                       <a
                         key={i}
                         href={item.href}
-                        target={item.label === "HQ" ? "_blank" : undefined}
-                        rel={
-                          item.label === "HQ"
-                            ? "noopener noreferrer"
-                            : undefined
-                        }
-                        className="flex gap-4 group">
-                        <div className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center transition-colors group-hover:bg-white/20">
-                          <Icon className="w-5 h-5" />
+                        target={isMap ? "_blank" : undefined}
+                        rel={isMap ? "noopener noreferrer" : undefined}
+                        className="group flex items-start gap-4 rounded-2xl border border-white/10 bg-white/5 p-4 transition
+                                   hover:bg-white/10 active:bg-white/15">
+                        <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 transition-colors group-hover:bg-white/20">
+                          <Icon className="h-5 w-5" />
                         </div>
 
-                        <div>
-                          <p className="text-md font-bold uppercase tracking-widest opacity-60">
+                        <div className="min-w-0">
+                          <p className="text-[11px] sm:text-xs font-bold uppercase tracking-widest text-white/60">
                             {item.label}
                           </p>
-                          <p className="font-medium">{item.val}</p>
+                          <p className="text-sm sm:text-base font-medium break-words">
+                            {item.val}
+                          </p>
                         </div>
                       </a>
                     );
@@ -128,31 +118,42 @@ const Contact = () => {
                 </div>
               </div>
 
-              {/* <div className="mt-15 pt-8 border-t border-white/10 flex items-center gap-4 text-md opacity-80">
-                <Clock className="w-4 h-4" />
+              {/* Trust line */}
+              <div className="mt-8 pt-6 border-t border-white/10 flex items-center gap-3 text-sm text-white/80">
+                <Clock className="h-4 w-4" />
                 <span>Response time: &lt; 24 hours</span>
-              </div> */}
+              </div>
             </div>
 
-            {/* Right Column: Form (3/5 width) */}
-            <div className="lg:col-span-3 bg-card p-8 md:p-12 text-lg mt-10">
+            {/* Right: Form */}
+            <div className="lg:col-span-3 bg-card p-6 sm:p-8 md:p-12">
+              <div className="mb-6">
+                <h3 className="text-xl sm:text-2xl font-bold text-foreground">
+                  Send an inquiry
+                </h3>
+                <p className="mt-2 text-sm sm:text-base text-muted-foreground">
+                  Tell us what you’re looking for and we’ll follow up with next
+                  steps.
+                </p>
+              </div>
+
               <Form {...form}>
                 <form
                   // onSubmit={form.handleSubmit(onSubmit)}
                   className="space-y-6">
-                  <div className="grid sm:grid-cols-2 gap-6">
+                  <div className="grid gap-5 sm:grid-cols-2">
                     <FormField
                       control={form.control}
                       name="name"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="font-bold text-lg">
+                          <FormLabel className="text-sm sm:text-base font-semibold">
                             Full Name
                           </FormLabel>
                           <FormControl>
                             <Input
                               placeholder="John Doe"
-                              className="bg-muted/30 border-none h-12"
+                              className="h-12 bg-muted/30 border-border"
                               {...field}
                             />
                           </FormControl>
@@ -160,18 +161,19 @@ const Contact = () => {
                         </FormItem>
                       )}
                     />
+
                     <FormField
                       control={form.control}
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="font-bold text-lg">
+                          <FormLabel className="text-sm sm:text-base font-semibold">
                             Work Email
                           </FormLabel>
                           <FormControl>
                             <Input
                               placeholder="j.doe@school.edu"
-                              className="bg-muted/30 border-none h-12"
+                              className="h-12 bg-muted/30 border-border"
                               {...field}
                             />
                           </FormControl>
@@ -181,19 +183,19 @@ const Contact = () => {
                     />
                   </div>
 
-                  <div className="grid sm:grid-cols-2 gap-6">
+                  <div className="grid gap-5 sm:grid-cols-2">
                     <FormField
                       control={form.control}
                       name="organization"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="font-bold text-lg">
+                          <FormLabel className="text-sm sm:text-base font-semibold">
                             Organization
                           </FormLabel>
                           <FormControl>
                             <Input
-                              placeholder="District Name"
-                              className="bg-muted/30 border-none h-12"
+                              placeholder="District / School"
+                              className="h-12 bg-muted/30 border-border"
                               {...field}
                             />
                           </FormControl>
@@ -201,18 +203,19 @@ const Contact = () => {
                         </FormItem>
                       )}
                     />
+
                     <FormField
                       control={form.control}
                       name="phone"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="font-bold text-lg">
+                          <FormLabel className="text-sm sm:text-base font-semibold">
                             Phone (Optional)
                           </FormLabel>
                           <FormControl>
                             <Input
                               placeholder="+1 (555) 000-0000"
-                              className="bg-muted/30 border-none h-12"
+                              className="h-12 bg-muted/30 border-border"
                               {...field}
                             />
                           </FormControl>
@@ -227,13 +230,13 @@ const Contact = () => {
                     name="message"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="font-bold text-lg">
+                        <FormLabel className="text-sm sm:text-base font-semibold">
                           How can we help?
                         </FormLabel>
                         <FormControl>
                           <Textarea
                             placeholder="Tell us about your school safety goals..."
-                            className="bg-muted/30 border-none min-h-30 resize-none"
+                            className="min-h-[140px] bg-muted/30 border-border resize-none"
                             {...field}
                           />
                         </FormControl>
@@ -245,7 +248,7 @@ const Contact = () => {
                   <Button
                     type="submit"
                     size="lg"
-                    className="w-full h-14 text-lg font-bold transition-all hover:shadow-lg active:scale-[0.98]"
+                    className="w-full h-12 sm:h-14 text-base sm:text-lg font-bold transition-all hover:shadow-lg active:scale-[0.98]"
                     disabled={isSubmitting}>
                     {isSubmitting ? (
                       <span className="flex items-center gap-2 italic">
@@ -253,16 +256,15 @@ const Contact = () => {
                       </span>
                     ) : (
                       <span className="flex items-center gap-2">
-                        Send Inquiry <Send className="w-4 h-4" />
+                        Send Inquiry <Send className="h-4 w-4" />
                       </span>
                     )}
                   </Button>
 
-                  <div className="flex items-center justify-center gap-2 text-md text-muted-foreground pt-4">
-                    <ShieldCheck className="w-4 h-4 text-primary" />
+                  <div className="flex items-start sm:items-center justify-center gap-2 text-xs sm:text-sm text-muted-foreground pt-2">
+                    <ShieldCheck className="h-4 w-4 text-primary mt-0.5 sm:mt-0" />
                     <span>
-                      Your data is encrypted and strictly used for safety
-                      consultations.
+                      Your information is used only for safety consultations.
                     </span>
                   </div>
                 </form>
