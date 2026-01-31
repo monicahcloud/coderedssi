@@ -3,7 +3,10 @@ import Footer from "@/components/Footer";
 import Certification from "@/components/landingpage/Certification";
 import CTA from "@/components/landingpage/CTA";
 import Hero from "@/components/landingpage/Hero";
-import Services from "@/components/Services";
+import Sponsership from "@/components/landingpage/Sponsers";
+import Services from "@/components/landingpage/Services";
+import FiscalGovernance from "@/components/landingpage/FiscalGoverance";
+import MarketReality from "@/components/landingpage/MarketReality";
 
 export default function Home() {
   return (
@@ -13,10 +16,14 @@ export default function Home() {
       {/* Main content */}
       <main>
         <Hero />
+        <MarketReality />
         <Services />
-        <Certification />
-        <Contact />
+        <Sponsership />
+        {/* <Certification /> replace with coporate sponsership and donors...  */}
+
+        <FiscalGovernance />
         <CTA />
+        <Contact />
       </main>
       <Footer />
     </div>

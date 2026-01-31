@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -15,41 +17,34 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-
-import { Mail, Phone, MapPin, Send, ShieldCheck, Clock } from "lucide-react";
-
-const contactItems = [
-  {
-    icon: Mail,
-    label: "Email",
-    val: "jhicks@coderedssi.com",
-    href: "mailto:jhicks@coderedssi.com",
-  },
-  {
-    icon: Phone,
-    label: "Direct",
-    val: "(844) 243-5727",
-    href: "tel:+18442435727",
-  },
-  {
-    icon: MapPin,
-    label: "HQ",
-    val: "2212 Crosby Rd, Valrico, FL 33594",
-    href: "https://www.google.com/maps/search/?api=1&query=2212+Crosby+Rd,+Valrico,+FL+33594",
-  },
-];
+import { Badge } from "@/components/ui/badge";
+import {
+  Mail,
+  Phone,
+  Send,
+  ShieldCheck,
+  ArrowRight,
+  ArrowUpRight,
+  FileText,
+} from "lucide-react";
 
 const contactSchema = z.object({
-  name: z.string().trim().min(1, "Name is required"),
-  email: z.string().trim().email("Invalid email address"),
-  organization: z.string().trim().optional().or(z.literal("")),
+  name: z.string().trim().min(1, "Identity is required"),
+  email: z.string().trim().email("Invalid institutional email"),
+  organization: z.string().trim().min(1, "Entity name is required"),
   phone: z.string().trim().optional().or(z.literal("")),
-  message: z.string().trim().min(1, "Message is required"),
+  message: z.string().trim().min(1, "Please define your interest"),
+  website: z.string().optional().or(z.literal("")), // Honeypot
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
 
-const Contact = () => {
+export default function InvestorContact() {
+  const [status, setStatus] = useState<{
+    type: "success" | "error";
+    message: string;
+  } | null>(null);
+
   const form = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
     defaultValues: {
@@ -58,168 +53,199 @@ const Contact = () => {
       organization: "",
       phone: "",
       message: "",
+      website: "",
     },
   });
 
-  const isSubmitting = form.formState.isSubmitting;
+  const onSubmit = async (data: ContactFormData) => {
+    setStatus(null);
+    if (data.website) {
+      // Bot trap
+      form.reset();
+      setStatus({ type: "success", message: "Transmission received." });
+      return;
+    }
+    // Simulate API call
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+      form.reset();
+      setStatus({
+        type: "success",
+        message:
+          "Strategic briefing request received. Our founding team will contact you within 12 hours.",
+      });
+    } catch {
+      setStatus({
+        type: "error",
+        message: "System transmission error. Please use direct line.",
+      });
+    }
+  };
 
   return (
     <section
       id="contact"
-      className="relative overflow-hidden bg-background py-16 sm:py-20 md:py-24">
-      {/* subtle background blob */}
-      <div className="absolute -top-24 -right-24 h-72 w-72 sm:h-96 sm:w-96 rounded-full bg-primary/5 blur-3xl" />
+      className="relative py-32 bg-background overflow-hidden border-t border-white/5">
+      {/* Structural Accents */}
+      <div className="absolute inset-0 opacity-[0.02] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
 
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="mx-auto max-w-6xl">
-          <div className="grid overflow-hidden rounded-3xl border border-border shadow-2xl lg:grid-cols-5">
-            {/* Left: Info */}
-            <div className="lg:col-span-2 bg-primary text-primary-foreground p-6 sm:p-8 md:p-12 flex flex-col justify-between">
-              <div>
-                <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold tracking-tight">
-                  Let’s build a <br />
-                  <span className="text-white/70 italic">safer campus.</span>
-                </h2>
-
-                <p className="mt-4 text-primary-foreground/85 text-sm sm:text-base md:text-lg">
-                  Have questions about our standards or certification pathway?
-                  Our specialists can walk you through next steps.
-                </p>
-
-                {/* Contact items */}
-                <div className="mt-8 space-y-4">
-                  {contactItems.map((item, i) => {
-                    const Icon = item.icon;
-                    const isMap = item.label === "HQ";
-
-                    return (
-                      <a
-                        key={i}
-                        href={item.href}
-                        target={isMap ? "_blank" : undefined}
-                        rel={isMap ? "noopener noreferrer" : undefined}
-                        className="group flex items-start gap-4 rounded-2xl border border-white/10 bg-white/5 p-4 transition
-                                   hover:bg-white/10 active:bg-white/15">
-                        <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 transition-colors group-hover:bg-white/20">
-                          <Icon className="h-5 w-5" />
-                        </div>
-
-                        <div className="min-w-0">
-                          <p className="text-[11px] sm:text-xs font-bold uppercase tracking-widest text-white/60">
-                            {item.label}
-                          </p>
-                          <p className="text-sm sm:text-base font-medium break-words">
-                            {item.val}
-                          </p>
-                        </div>
-                      </a>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Trust line */}
-              <div className="mt-8 pt-6 border-t border-white/10 flex items-center gap-3 text-sm text-white/80">
-                <Clock className="h-4 w-4" />
-                <span>Response time: &lt; 24 hours</span>
-              </div>
+      <div className="container relative z-10 mx-auto px-6">
+        <div className="grid lg:grid-cols-12 gap-16 items-start">
+          {/* LEFT: Briefing Info */}
+          <div className="lg:col-span-5 space-y-12">
+            <div>
+              <Badge
+                variant="outline"
+                className="mb-6 rounded-none border-l-4 border-l-primary border-y-0 border-r-0 px-4 bg-primary/5 text-primary uppercase tracking-[0.3em] text-[10px] font-black">
+                Investor Relations
+              </Badge>
+              <h2 className="text-6xl md:text-7xl font-black tracking-tighter uppercase leading-[0.85] mb-8">
+                OPEN THE <br />
+                <span className="text-primary italic">CHANNEL.</span>
+              </h2>
+              <p className="text-xl text-muted-foreground leading-relaxed italic border-l-2 border-primary/20 pl-6">
+                "We are currently finalizing the Founding Alliance. Secure your
+                position in the 2026 national pilot expansion."
+              </p>
             </div>
 
-            {/* Right: Form */}
-            <div className="lg:col-span-3 bg-card p-6 sm:p-8 md:p-12">
-              <div className="mb-6">
-                <h3 className="text-xl sm:text-2xl font-bold text-foreground">
-                  Send an inquiry
+            <div className="space-y-6">
+              <div className="p-8 bg-muted/30 border border-border rounded-[2rem] space-y-4 relative group hover:border-primary/40 transition-all">
+                <FileText className="h-8 w-8 text-primary mb-2" />
+                <h4 className="text-xl font-bold uppercase tracking-tight">
+                  Request Case for Support
+                </h4>
+                <p className="text-sm text-muted-foreground">
+                  Receive the full 24-page PDF detailing our operational
+                  roadmap, district selection criteria, and ROI projections.
+                </p>
+                <ArrowUpRight className="absolute top-8 right-8 h-5 w-5 opacity-20 group-hover:opacity-100 transition-opacity" />
+              </div>
+
+              <div className="flex flex-col gap-4">
+                <a
+                  href="tel:+18442435727"
+                  className="flex items-center gap-4 text-sm font-black uppercase tracking-widest text-foreground hover:text-primary transition-colors">
+                  <Phone className="h-4 w-4" /> (844) 243-5727
+                </a>
+                <a
+                  href="mailto:info@coderedssi.org"
+                  className="flex items-center gap-4 text-sm font-black uppercase tracking-widest text-foreground hover:text-primary transition-colors">
+                  <Mail className="h-4 w-4" /> info@coderedssi.org
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* RIGHT: The Briefing Terminal */}
+          <div className="lg:col-span-7">
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              className="relative p-10 md:p-14 bg-foreground rounded-[3rem] text-background shadow-2xl">
+              <div className="mb-10">
+                <h3 className="text-3xl font-black uppercase italic tracking-tighter mb-2 text-primary">
+                  Founding Inquiry
                 </h3>
-                <p className="mt-2 text-sm sm:text-base text-muted-foreground">
-                  Tell us what you’re looking for and we’ll follow up with next
-                  steps.
+                <p className="text-background/50">
+                  Establish direct communication with our board of directors.
                 </p>
               </div>
+
+              <AnimatePresence mode="wait">
+                {status && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className={`mb-8 p-6 rounded-2xl border-l-4 font-bold text-sm ${
+                      status.type === "success"
+                        ? "bg-primary/10 border-primary text-primary"
+                        : "bg-red-500/10 border-red-500 text-red-500"
+                    }`}>
+                    {status.message}
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
               <Form {...form}>
                 <form
-                  // onSubmit={form.handleSubmit(onSubmit)}
+                  onSubmit={form.handleSubmit(onSubmit)}
                   className="space-y-6">
-                  <div className="grid gap-5 sm:grid-cols-2">
+                  <div className="grid md:grid-cols-2 gap-6">
                     <FormField
                       control={form.control}
                       name="name"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-sm sm:text-base font-semibold">
-                            Full Name
+                          <FormLabel className="uppercase text-[9px] font-black tracking-[0.2em] text-background/40">
+                            Principal Identity
                           </FormLabel>
                           <FormControl>
                             <Input
-                              placeholder="John Doe"
-                              className="h-12 bg-muted/30 border-border"
+                              placeholder="Full Name"
+                              className="bg-background/[0.03] border-background/10 text-background placeholder:text-background/20 h-14 rounded-xl focus:border-primary/50 transition-all"
                               {...field}
                             />
                           </FormControl>
-                          <FormMessage />
+                          <FormMessage className="text-red-400" />
                         </FormItem>
                       )}
                     />
-
                     <FormField
                       control={form.control}
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-sm sm:text-base font-semibold">
-                            Work Email
+                          <FormLabel className="uppercase text-[9px] font-black tracking-[0.2em] text-background/40">
+                            Institutional Email
                           </FormLabel>
                           <FormControl>
                             <Input
-                              placeholder="j.doe@school.edu"
-                              className="h-12 bg-muted/30 border-border"
+                              placeholder="name@foundation.org"
+                              className="bg-background/[0.03] border-background/10 text-background placeholder:text-background/20 h-14 rounded-xl focus:border-primary/50"
                               {...field}
                             />
                           </FormControl>
-                          <FormMessage />
+                          <FormMessage className="text-red-400" />
                         </FormItem>
                       )}
                     />
                   </div>
 
-                  <div className="grid gap-5 sm:grid-cols-2">
+                  <div className="grid md:grid-cols-2 gap-6">
                     <FormField
                       control={form.control}
                       name="organization"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-sm sm:text-base font-semibold">
-                            Organization
+                          <FormLabel className="uppercase text-[9px] font-black tracking-[0.2em] text-background/40">
+                            Representing Entity
                           </FormLabel>
                           <FormControl>
                             <Input
-                              placeholder="District / School"
-                              className="h-12 bg-muted/30 border-border"
+                              placeholder="Foundation / Corporation / Family Office"
+                              className="bg-background/[0.03] border-background/10 text-background placeholder:text-background/20 h-14 rounded-xl focus:border-primary/50"
                               {...field}
                             />
                           </FormControl>
-                          <FormMessage />
                         </FormItem>
                       )}
                     />
-
                     <FormField
                       control={form.control}
                       name="phone"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-sm sm:text-base font-semibold">
-                            Phone (Optional)
+                          <FormLabel className="uppercase text-[9px] font-black tracking-[0.2em] text-background/40">
+                            Priority Line
                           </FormLabel>
                           <FormControl>
                             <Input
-                              placeholder="+1 (555) 000-0000"
-                              className="h-12 bg-muted/30 border-border"
+                              placeholder="+1 (000) 000-0000"
+                              className="bg-background/[0.03] border-background/10 text-background placeholder:text-background/20 h-14 rounded-xl focus:border-primary/50"
                               {...field}
                             />
                           </FormControl>
-                          <FormMessage />
                         </FormItem>
                       )}
                     />
@@ -230,51 +256,47 @@ const Contact = () => {
                     name="message"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-sm sm:text-base font-semibold">
-                          How can we help?
+                        <FormLabel className="uppercase text-[9px] font-black tracking-[0.2em] text-background/40">
+                          Engagement Objectives
                         </FormLabel>
                         <FormControl>
                           <Textarea
-                            placeholder="Tell us about your school safety goals..."
-                            className="min-h-[140px] bg-muted/30 border-border resize-none"
+                            placeholder="Define your philanthropic or strategic goals..."
+                            className="bg-background/[0.03] border-background/10 text-background placeholder:text-background/20 min-h-[140px] rounded-2xl resize-none focus:border-primary/50"
                             {...field}
                           />
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage className="text-red-400" />
                       </FormItem>
                     )}
                   />
 
                   <Button
                     type="submit"
-                    size="lg"
-                    className="w-full h-12 sm:h-14 text-base sm:text-lg font-bold transition-all hover:shadow-lg active:scale-[0.98]"
-                    disabled={isSubmitting}>
-                    {isSubmitting ? (
-                      <span className="flex items-center gap-2 italic">
-                        Processing...
-                      </span>
+                    disabled={form.formState.isSubmitting}
+                    className="w-full h-18 rounded-full bg-primary text-primary-foreground text-lg font-black uppercase tracking-tighter group hover:scale-[1.02] transition-all shadow-[0_0_40px_-10px_rgba(var(--primary),0.5)]">
+                    {form.formState.isSubmitting ? (
+                      "INITIATING UPLOAD..."
                     ) : (
-                      <span className="flex items-center gap-2">
-                        Send Inquiry <Send className="h-4 w-4" />
+                      <span className="flex items-center gap-3">
+                        Request Strategic Briefing{" "}
+                        <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
                       </span>
                     )}
                   </Button>
 
-                  <div className="flex items-start sm:items-center justify-center gap-2 text-xs sm:text-sm text-muted-foreground pt-2">
-                    <ShieldCheck className="h-4 w-4 text-primary mt-0.5 sm:mt-0" />
-                    <span>
-                      Your information is used only for safety consultations.
-                    </span>
+                  <div className="flex items-center justify-center gap-4 pt-6">
+                    <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-background/30">
+                      <ShieldCheck className="h-3 w-3 text-primary" />
+                      Priority Channel Status: Active
+                    </div>
                   </div>
                 </form>
               </Form>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
     </section>
   );
-};
-
-export default Contact;
+}
