@@ -1,15 +1,7 @@
 "use client";
 
-import React from "react";
 import { motion } from "framer-motion";
-import {
-  ShieldCheck,
-  FileText,
-  LineChart,
-  Scale,
-  Lock,
-  ChevronRight,
-} from "lucide-react";
+import { ShieldCheck, FileText, LineChart, Scale, Lock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 const GOVERNANCE_PILLARS = [
@@ -17,16 +9,20 @@ const GOVERNANCE_PILLARS = [
     icon: Scale,
     title: "501(c)(3) Integrity",
     desc: "Strict adherence to federal nonprofit regulations ensuring all capital is deployed toward our mission of student safety.",
+    proof: "Annual independent financial review once revenue exceeds $250,000.",
   },
   {
     icon: LineChart,
     title: "Impact Attribution",
     desc: "Direct tracking of capital to regional pilot outcomes, providing donors with verifiable data on lives protected.",
+    proof:
+      "Quarterly KPI dashboards tracking readiness scores, staff trained, and equipment value deployed.",
   },
   {
     icon: FileText,
     title: "Audit Transparency",
     desc: "Annual third-party financial reviews and open-book reporting for our Founding Alliance members.",
+    proof: "Goal: maintain administrative expenses under 20% of total budget.",
   },
 ];
 
@@ -93,6 +89,10 @@ export default function FiscalGovernance() {
                     </h4>
                     <p className="text-sm text-muted-foreground leading-relaxed">
                       {pillar.desc}
+                    </p>
+
+                    <p className="text-xs font-semibold text-primary mt-2">
+                      {pillar.proof}
                     </p>
                   </div>
                 </div>

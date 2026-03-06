@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { AlertCircle, BarChart, Users, TrendingUp } from "lucide-react";
+import { BarChart } from "lucide-react";
 
 const MARKET_DATA = [
   {
@@ -9,21 +9,23 @@ const MARKET_DATA = [
     value: "75%",
     stat: "of staff feel under-equipped",
     desc: "A majority of educators report lack of tactical readiness for high-stress incidents.",
-    source: "NCES Data",
+    source: "Source: NCES teacher surveys, 2018–2022",
   },
   {
-    label: "Audit Lag",
+    label: "Limited Assessments",
     value: "3+ Yrs",
-    stat: "Since last professional audit",
-    desc: "Most high-need districts are operating on outdated safety assessments.",
-    source: "Educational Research Group",
+    stat: "Most schools see at most 1 professional safety assessment a year.",
+    desc: "Code Red adds complementary assessments and training so districts get continuous improvement, not one-off assessments and training.",
+    source:
+      "Target: annual re-assessments and follow-up support for every participating school.",
   },
   {
-    label: "Impact Potential",
-    value: "15,000",
-    stat: "Students per Regional Hub",
-    desc: "Our pilot model is designed to secure entire district ecosystems simultaneously.",
-    source: "Code Red Pro Forma",
+    label: "Unfunded Upgrades",
+    value: "250,000+",
+    stat: "Critical security equipment is routinely delayed or cut due to cost.",
+    desc: "We broker donated or discounted cameras, access-control, and alert systems so high-risk schools can close gaps that budgets overlook.",
+    source:
+      "Goal: $250,000+ in donated or discounted safety technology deployed in the first 3 years.",
   },
 ];
 
@@ -57,7 +59,7 @@ export default function MarketReality() {
                 {item.desc}
               </p>
               <p className="text-[9px] font-mono text-muted-foreground/50 italic">
-                Source: {item.source}
+                {item.source}
               </p>
             </motion.div>
           ))}

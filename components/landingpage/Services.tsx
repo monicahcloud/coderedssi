@@ -3,14 +3,11 @@
 import React from "react";
 import { motion } from "framer-motion";
 import {
-  ShieldCheck,
   FileSpreadsheet,
   Users2,
   Plus,
   Network,
-  PieChart,
   Building2,
-  Target,
   LineChart,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -22,6 +19,7 @@ const corporatePhases = [
     title: "Risk Assessment",
     description:
       "A comprehensive audit of institutional safety infrastructure and emergency protocols to identify systemic vulnerabilities and prioritize strategic capital allocation.",
+    target: "Target: 150 schools assessed in the first 3 years.",
     features: [
       "Infrastructure Vulnerability Audits",
       "Operational Risk Analysis",
@@ -36,6 +34,7 @@ const corporatePhases = [
     title: "Training & Certification",
     description:
       "Executive-level professional development focused on organizational readiness, stakeholder communication, and fostering a proactive culture of safety.",
+    target: "Target: 5,000+ educators trained in the first 3 years.",
     features: [
       "Administrative Readiness",
       "Crisis Communication Lab",
@@ -50,6 +49,8 @@ const corporatePhases = [
     title: "Equipment Provision",
     description:
       "Accelerating safety through the distribution of high-grade hardware and safety technology via strategic grants and in-kind corporate contributions.",
+    target:
+      "Goal: $250,000 in donated or discounted security technology brokered to schools.",
     features: [
       "Grant-Funded Safety Hardware",
       "In-Kind Resource Distribution",
@@ -111,9 +112,12 @@ export default function ImpactFramework() {
                   {phase.title}
                 </h4>
                 <p className="text-muted-foreground mb-8 text-sm leading-relaxed italic">
-                  "{phase.description}"
+                  &quot;{phase.description}&quot;
                 </p>
 
+                <p className="text-muted-foreground mb-8 text-sm leading-relaxed italic">
+                  {phase.target}
+                </p>
                 <ul className="space-y-4 mb-10">
                   {phase.features.map((feature, i) => (
                     <li

@@ -10,6 +10,7 @@ import {
   ChevronRight,
   PieChart,
   AlertCircle,
+  ShieldAlert,
 } from "lucide-react";
 import { HeroVideoBackground } from "./HeroVideoBackground";
 
@@ -17,17 +18,17 @@ const INVESTMENT_POINTS = [
   {
     icon: Target,
     title: "THE GAP",
-    desc: "Current safety measures are reactive. Code Red provides the proactive infrastructure.",
+    desc: "Most districts receive at most one formal safety assessment in a year, if any, and critical recommendations often go unfunded. Current security hardware, monitoring, and access-control upgrades are priced far beyond what under-resourced schools can sustain.",
   },
   {
     icon: BarChart3,
     title: "SCALABLE IMPACT",
-    desc: "A model designed for rapid national deployment across underfunded districts.",
+    desc: "Code Red acts as a force multiplier by standardizing school safety assessments, training local staff, and brokering donated or discounted technology—allowing each dollar invested to protect multiple campuses instead of just one.",
   },
   {
     icon: TrendingUp,
-    title: "EARLY STAGE",
-    desc: "Now entering the 'Alpha' funding round for our 2026 pilot expansion.",
+    title: "LAUNCH PHASE",
+    desc: "We are in our early launch phase, operating with a lean team and clear three-year targets: 150 schools assessed, 5,000+ educators trained, and at least $250,000 in safety technology brokered to high-need campuses.",
   },
 ];
 
@@ -35,22 +36,21 @@ const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
       <HeroVideoBackground />
-
-      <div className="container relative z-10 mx-auto px-6 lg:px-8 py-20">
+      <div className="container relative z-10 mx-auto px-6 lg:px-8 py-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* LEFT COLUMN: The Pitch */}
           <div className="max-w-3xl">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="w-[220px] sm:w-[320px] mb-12">
+              className="w-full max-w-162.5 mb-12">
               <Image
-                src="/logocropped.png"
+                src="/Code_Red_Approved_Logo_Designs.png"
                 alt="Code Red Safe Schools Initiative"
                 width={1840}
                 height={860}
                 priority
-                className="h-auto w-full object-contain "
+                className="h-auto w-full object-contain"
               />
             </motion.div>
 
@@ -72,15 +72,19 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}>
-              <h1 className="text-5xl md:text-7xl xl:text-8xl font-black tracking-tighter text-primary-foreground leading-[0.85] uppercase mb-6">
-                Standardizing <br />
-                <span className="text-primary italic">School Safety.</span>
+              <h1 className="text-5xl md:text-7xl xl:text-8xl font-black tracking-tighter text-primary-foreground  uppercase mb-6">
+                RAISING THE STANDARD <br />
+                <span className="text-primary text-6xl italic">
+                  {" "}
+                  Of School Safety.
+                </span>
               </h1>
 
               <div className="flex items-center gap-4 mb-8">
-                <div className="h-[2px] w-12 bg-primary" />
+                {/* <div className="h-[2px] w-12 bg-primary" /> */}
                 <p className="text-xl md:text-2xl text-primary-foreground font-bold tracking-tight uppercase">
-                  Seed the Future of Protection.
+                  Professional security assessments and training for K–12
+                  schools at no cost to districts.
                 </p>
               </div>
 
@@ -101,13 +105,13 @@ const Hero = () => {
                   <ChevronRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </a>
               </Button>
-              <Button
+              {/* <Button
                 asChild
                 variant="outline"
                 size="lg"
                 className="h-16 px-8 rounded-full border-white/20 bg-white/5 text-white backdrop-blur-md hover:bg-white hover:text-black transition-all text-lg font-black uppercase tracking-tighter">
                 <a href="#pro-forma">Review the Strategic Prospectus</a>
-              </Button>
+              </Button> */}
             </div>
           </div>
 
@@ -117,7 +121,7 @@ const Hero = () => {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.8, duration: 1 }}
-              className="relative w-full max-w-[500px] aspect-square rounded-full border border-white/10 flex items-center justify-center">
+              className="relative w-full max-w-125 aspect-square rounded-full border border-white/10 flex items-center justify-center">
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
@@ -125,33 +129,52 @@ const Hero = () => {
               />
 
               <div className="relative z-10 w-full p-8 space-y-4">
-                {/* Funding Status */}
-                <div className="bg-black/80 backdrop-blur-xl border border-white/10 p-5 rounded-2xl shadow-2xl">
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-primary mb-1">
-                    Capital Engagement: 2026
-                  </p>
-                  <p className="text-white text-2xl font-bold tracking-tighter leading-none mb-2">
-                    15% Funding Secured
-                  </p>
-                  <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
-                    <motion.div
-                      initial={{ width: 0 }}
-                      animate={{ width: "15%" }}
-                      transition={{ duration: 2, delay: 1.5 }}
-                      className="h-full bg-primary"
-                    />
+                <motion.div
+                  whileHover={{ x: -10 }}
+                  className="bg-black/80 backdrop-blur-xl border border-white/10 p-5 rounded-2xl flex items-center gap-4 cursor-default">
+                  <div className="h-10 w-10 rounded-lg bg-primary/20 flex items-center justify-center shrink-0">
+                    <ShieldAlert className="h-5 w-5 text-primary" />
                   </div>
-                  <div className="flex justify-between mt-2">
-                    <span className="text-[9px] text-white/40 font-mono italic uppercase">
-                      $140k Remaining
-                    </span>
-                    <span className="text-[9px] text-primary font-mono font-bold uppercase">
-                      Pilot Funding Round
-                    </span>
+                  <div>
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-primary mb-0.5">
+                      National Risk Snapshot
+                    </p>
+                    <p className="text-white font-bold text-xl underline underline-offset-4 decoration-red-500  ">
+                      $1.3M
+                    </p>
+                    <p className="text-white font-bold text-lg  leading-tight tracking-tight">
+                      Annual Cost of School Violence
+                    </p>
+                    <p className="text-white text-[15px]  leading-tight tracking-tight"></p>
+                    <p className="text-[9px] text-white/50 uppercase font-mono tracking-tighter">
+                      Source: National Center for Education Statistics (NCES)
+                    </p>
                   </div>
-                </div>
+                </motion.div>
 
-                {/* Stat 01: NCES Data */}
+                <motion.div
+                  whileHover={{ x: 10 }}
+                  className="bg-black/80 backdrop-blur-xl border border-white/10 p-5 rounded-2xl translate-x-12 flex items-center gap-4 cursor-default">
+                  <div className="h-10 w-10 rounded-lg bg-primary/20 flex items-center justify-center shrink-0">
+                    <PieChart className="h-5 w-5 text-primary" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-primary mb-0.5">
+                      National Risk Snapshot
+                    </p>
+                    <p className="text-white font-bold text-xl underline underline-offset-4 decoration-red-500  ">
+                      1,626
+                    </p>
+                    <p className="text-white font-bold text-lg  leading-tight tracking-tight">
+                      School shooting incidents
+                    </p>
+                    <p className="text-white text-[15px]  leading-tight tracking-tight"></p>
+                    <p className="text-[9px] text-white/50 uppercase font-mono tracking-tighter">
+                      Source: K–12 School Shooting Database (summary)
+                    </p>
+                  </div>
+                </motion.div>
+
                 <motion.div
                   whileHover={{ x: 10 }}
                   className="bg-black/80 backdrop-blur-xl border border-white/10 p-5 rounded-2xl translate-x-12 flex items-center gap-4 cursor-default">
@@ -160,36 +183,43 @@ const Hero = () => {
                   </div>
                   <div>
                     <p className="text-[10px] font-bold uppercase tracking-widest text-primary mb-0.5">
-                      Assessment Deficit
+                      Behavioral Reality
                     </p>
-                    <p className="text-white font-bold text-lg leading-tight tracking-tight">
-                      60% of Schools
+                    <p className="text-white font-bold text-xl underline underline-offset-4 decoration-red-500  ">
+                      88%
                     </p>
+                    <p className="text-white font-bold text-lg  leading-tight tracking-tight">
+                      of school safety incidents are behavioral
+                    </p>
+                    <p className="text-white text-[15px]  leading-tight tracking-tight"></p>
                     <p className="text-[9px] text-white/50 uppercase font-mono tracking-tighter">
-                      Lack professional audits since 2022
+                      Source: 2025 K–12 School Safety Trends Report (CENTEGIX)
                     </p>
                   </div>
                 </motion.div>
 
-                {/* Stat 02: Readiness Gap */}
-                <motion.div
-                  whileHover={{ x: -10 }}
-                  className="bg-black/80 backdrop-blur-xl border border-white/10 p-5 rounded-2xl flex items-center gap-4 cursor-default">
+                {/* <motion.div
+                  whileHover={{ x: 10 }}
+                  className="bg-black/80 backdrop-blur-xl border border-white/10 p-5 rounded-2xl translate-x-12 flex items-center gap-4 cursor-default">
                   <div className="h-10 w-10 rounded-lg bg-primary/20 flex items-center justify-center shrink-0">
-                    <PieChart className="h-5 w-5 text-primary" />
+                    <AlertCircle className="h-5 w-5 text-primary" />
                   </div>
                   <div>
                     <p className="text-[10px] font-bold uppercase tracking-widest text-primary mb-0.5">
-                      National Security Gap
+                      Behavioral Reality
                     </p>
-                    <p className="text-white font-bold text-lg leading-tight tracking-tight">
-                      75% Under-Equipped
+                    <p className="text-white font-bold text-xl underline underline-offset-4 decoration-red-500  ">
+                      88%
                     </p>
+                    <p className="text-white font-bold text-lg  leading-tight tracking-tight">
+                      of school safety incidents are behavioral
+                    </p>
+                    <p className="text-white text-[15px]  leading-tight tracking-tight"></p>
                     <p className="text-[9px] text-white/50 uppercase font-mono tracking-tighter">
-                      Source: NCES Safety Trends
+                      Source: 2025 K–12 School Safety Trends Report (CENTEGIX)
                     </p>
                   </div>
-                </motion.div>
+                </motion.div> */}
               </div>
             </motion.div>
           </div>
@@ -205,7 +235,7 @@ const Hero = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1 + idx * 0.1 }}
-                className="group relative overflow-hidden rounded-2xl bg-black/[0.5] border border-white/10 p-6 backdrop-blur-sm">
+                className="group relative overflow-hidden rounded-2xl bg-black/50 border border-white/10 p-6 backdrop-blur-sm">
                 <Icon className="h-6 w-6 text-primary mb-4" />
                 <div className="text-xs font-black tracking-widest text-primary-foreground mb-2">
                   {item.title}
@@ -219,7 +249,7 @@ const Hero = () => {
         </div>
       </div>
 
-      <div className="absolute inset-0 bg-linear-to-t from-background via-transparent to-transparent z-[5]" />
+      <div className="absolute inset-0 bg-linear-to-t from-background via-transparent to-transparent z-5" />
     </section>
   );
 };

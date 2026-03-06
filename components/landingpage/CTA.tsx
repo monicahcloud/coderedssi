@@ -1,10 +1,21 @@
 "use client";
 
-import React from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ArrowUpRight, FileText, Zap, ShieldCheck } from "lucide-react";
+import {
+  ArrowUpRight,
+  FileText,
+  Zap,
+  ShieldCheck,
+  CheckCircle2,
+} from "lucide-react";
+
+const CTA_POINTS = [
+  "Year 1: 25 schools assessed, 1,000 staff trained.",
+  "Projected surplus: $22K to build initial operating reserve.",
+  "Every school served at zero cost for assessments, training and security equipment.",
+];
 
 const FinalCTA = () => {
   return (
@@ -33,11 +44,25 @@ const FinalCTA = () => {
               <span className="text-primary italic">Foundation.</span>
             </h2>
 
-            <p className="max-w-2xl mx-auto text-base sm:text-lg md:text-2xl text-background/60 leading-relaxed font-medium mb-10 md:mb-12 text-center">
-              We are currently seeking $140k in seed capital to launch our 2026
-              pilot districts. Review the Strategic Prospectus and join the
-              Founding Alliance today.
+            <p className="max-w-2xl mx-auto text-base sm:text-lg md:text-2xl text-background/60 leading-relaxed font-medium mb-6 md:mb-8 text-center">
+              We are currently seeking $175k in capital to launch our 2026 pilot
+              districts. Review the Strategic Prospectus and become a Partner
+              today!
             </p>
+
+            {/* Micro-list */}
+            <div className="w-full max-w-2xl mx-auto mb-10 md:mb-12">
+              <div className="inline-flex flex-col items-start gap-3 text-left">
+                {CTA_POINTS.map((point, idx) => (
+                  <div key={idx} className="flex items-start gap-3">
+                    <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 shrink-0" />
+                    <p className="text-sm sm:text-base md:text-lg text-background/80 leading-relaxed font-medium">
+                      {point}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
 
             <div className="flex flex-col sm:flex-row justify-center items-center gap-4 md:gap-6 w-full max-w-2xl mx-auto">
               <Button
@@ -53,7 +78,7 @@ const FinalCTA = () => {
                 </a>
               </Button>
 
-              <Button
+              {/* <Button
                 asChild
                 variant="outline"
                 size="lg"
@@ -64,7 +89,7 @@ const FinalCTA = () => {
                   <FileText className="h-5 w-5 md:h-6 md:w-6" />
                   Request Prospectus
                 </a>
-              </Button>
+              </Button> */}
             </div>
           </motion.div>
 

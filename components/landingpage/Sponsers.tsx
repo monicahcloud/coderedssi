@@ -1,61 +1,78 @@
 "use client";
 
-import React from "react";
 import { motion } from "framer-motion";
-import {
-  Building2,
-  Landmark,
-  Users,
-  ShieldCheck,
-  ArrowUpRight,
-  TrendingUp,
-  Award,
-} from "lucide-react";
+import { CheckCircle2, Crown, Medal, Shield, Award } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import Image from "next/image";
 
-const ALLIANCE_LEVELS = [
+const HOW_PARTNERSHIPS_WORK = [
+  "Align on mission, ethics, and school safety standards.",
+  "Share recognition, data, and impact reporting with your stakeholders.",
+  "Contribute expertise, solutions, funding, or equipment (donated or at-cost).",
+  "Participate in pilot programs and proof-of-concept deployments with real districts.",
+  "Commit to collaboration over competition among vendors and stakeholders.",
+];
+
+const PARTNERSHIP_TIERS = [
   {
-    name: "Legacy Visionaries",
-    icon: Landmark,
-    title: "Strategic Lead Partners",
-    desc: "Principal founding partners providing the foundational capital for national pilot deployment and long-term organizational scaling.",
-    commit: "Funding Level: $50k+",
-    benefits: [
-      "National Advisory Board Seat",
-      "Enduring Legacy Naming Rights",
-      "Regional Strategic Hub Oversight",
-      "Quarterly Executive Briefings",
+    label: "NATIONAL PARTNER",
+    icon: Crown,
+    title: "Diamond Tier ",
+    value: "$2,000,000+ annually",
+    bullets: [
+      "National partnership recognition across all Code Red campaigns.",
+      "Statewide program deployment and multi-state pilot leadership.",
+      "Executive board participation in strategic guidance.",
+      "Co-branded program materials and national media opportunities.",
     ],
-    className: "lg:col-span-2 bg-primary/5 border-primary/20",
-    accent: "text-primary",
+    badgeSrc: "/diamondbadge.png",
+    className: "bg-primary/5 border-primary/20",
+    accent: "text-blue-600",
   },
   {
-    name: "Impact Partners",
-    icon: Building2,
-    title: "Regional Operations",
-    desc: "Corporate entities funding the direct implementation of safety frameworks within their primary operating regions.",
-    commit: "Funding Level: $15k+",
-    benefits: [
-      "Localized Community Attribution",
-      "Quarterly Social Impact Reporting",
-      "Stakeholder Recognition",
+    label: "REGIONAL PARTNER",
+    icon: Medal,
+    title: "Gold Tier ",
+    value: "$500,000–$1,999,999 annually",
+    bullets: [
+      "Regional partnership recognition across defined territories.",
+      "Multi-district program deployment (assessments, training, and upgrades).",
+      "Advisory board participation and strategic input.",
+      "Partnership case studies highlighting shared outcomes.",
     ],
-    className: "lg:col-span-1 bg-muted/40 border-border",
+    badgeSrc: "/goldbadge.png",
+    className: "bg-muted/40 border-border",
     accent: "text-amber-600",
   },
   {
-    name: "Sentinel Circle",
-    icon: TrendingUp,
-    title: "Growth Acceleration",
-    desc: "Individual philanthropists and industry leaders driving the continuous improvement of our safety methodology.",
-    commit: "Funding Level: $5k+",
-    benefits: [
-      "Sentinel Leadership Status",
-      "Annual Impact Summits",
-      "Priority Program Access",
+    label: "DISTRICT PARTNER",
+    icon: Shield,
+    title: "Silver Tier ",
+    value: "$100,000–$499,999 annually",
+    bullets: [
+      "District-level partnership recognition.",
+      "Single- or multi-school deployment within priority regions.",
+      "Involvement in implementation planning with school leaders.",
+      "Direct access to impact reporting and readiness metrics.",
     ],
-    className: "lg:col-span-1 bg-muted/40 border-border",
+    badgeSrc: "/silverbadge.png",
+    className: "bg-muted/40 border-border",
     accent: "text-slate-500",
+  },
+  {
+    label: "COMMUNITY PARTNER",
+    icon: Award,
+    title: "Bronze Tier ",
+    value: "$25,000–$99,999 annually",
+    bullets: [
+      "School-level partnership recognition.",
+      "Participation in pilot assessments and training programs.",
+      "Donor recognition across digital and print channels.",
+      "Quarterly impact updates and school-level success stories.",
+    ],
+    badgeSrc: "/bronzebadge.png",
+    className: "bg-muted/40 border-border",
+    accent: "text-orange-700",
   },
 ];
 
@@ -66,98 +83,128 @@ export default function FoundingAlliance() {
       <div className="absolute inset-0 opacity-[0.015] pointer-events-none [background-image:linear-gradient(to_right,#888_1px,transparent_1px),linear-gradient(to_bottom,#888_1px,transparent_1px)] [background-size:40px_40px]" />
 
       <div className="container relative z-10 mx-auto px-6">
-        {/* Executive Header */}
-        <div className="max-w-4xl mb-24">
+        {/* Header */}
+        <div className="max-w-4xl mb-14">
           <Badge
             variant="outline"
             className="mb-6 rounded-none border-l-4 border-l-primary border-y-0 border-r-0 px-4 py-1 text-primary uppercase text-[10px] font-bold tracking-[0.2em] bg-primary/5">
             Capital Engagement
           </Badge>
+
           <h2 className="text-5xl md:text-7xl font-bold tracking-tight uppercase leading-[0.9] mb-8">
-            The Founding <br />
-            <span className="text-primary italic">Alliance.</span>
+            How Strategic <br />
+            <span className="text-primary italic">Partnerships Work.</span>
           </h2>
-          <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl border-l border-primary/20 pl-6">
-            Code Red is built on a foundation of strategic philanthropic
-            partnerships. We are currently inviting founding stakeholders to
-            secure the infrastructure for our 2026 regional pilots.
+
+          <p className="text-xl text-muted-foreground leading-relaxed max-w-3xl border-l border-primary/20 pl-6">
+            We collaborate with organizations that are committed to measurable,
+            standards-driven school safety, while combining expertise, funding,
+            and technology to protect students nationwide.
           </p>
         </div>
 
-        {/* Tiers Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-20">
-          {ALLIANCE_LEVELS.map((level, idx) => {
-            const Icon = level.icon;
+        {/* How Partnerships Work (single clean card before tiers) */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.5 }}
+          className="mb-16 rounded-[2.5rem] border bg-muted/30 border-border p-10">
+          <div className="flex items-start justify-between gap-6 mb-8">
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground opacity-70">
+                Partnership Model
+              </p>
+              <h3 className="text-2xl md:text-3xl font-bold items-center justify-center text-center tracking-tight">
+                What partners do
+              </h3>
+            </div>
+
+            {/* <div className="w-12 h-12 rounded-2xl bg-background border border-border flex items-center justify-center">
+              <CheckCircle2 className="h-6 w-6 text-primary" />
+            </div> */}
+          </div>
+
+          <ul className="grid md:grid-cols-2 gap-x-10">
+            {HOW_PARTNERSHIPS_WORK.map((item, i) => (
+              <li
+                key={i}
+                className="flex items-start gap-3 text-sm md:text-base text-muted-foreground leading-relaxed">
+                <span className="mt-0.5">
+                  <CheckCircle2 className="h-5 w-5 text-primary" />
+                </span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </motion.div>
+
+        {/* Tier Cards */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
+          {PARTNERSHIP_TIERS.map((tier, idx) => {
+            // const Icon = tier.icon;
+
             return (
               <motion.div
                 key={idx}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                className={`group p-10 rounded-[2.5rem] border flex flex-col justify-between transition-all duration-500 hover:shadow-2xl hover:border-primary/40 ${level.className}`}>
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{ delay: idx * 0.08 }}
+                className={`group p-10 rounded-[2.5rem] border flex flex-col justify-between transition-all duration-500 hover:shadow-2xl hover:border-primary/40 ${tier.className}`}>
                 <div>
-                  <div className="flex justify-between items-center mb-12">
-                    <div className="w-14 h-14 rounded-2xl bg-background flex items-center justify-center border border-border group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
-                      <Icon className="h-7 w-7" />
-                    </div>
-                    <span className="text-[10px] font-bold tracking-[0.2em] text-muted-foreground opacity-50 uppercase">
-                      Engagement Phase 0{idx + 1}
-                    </span>
+                  <div className="flex items-start gap-4 mb-5">
+                    {tier.badgeSrc && (
+                      <div className="shrink-0">
+                        <Image
+                          src={tier.badgeSrc}
+                          alt={`${tier.label} badge`}
+                          width={300}
+                          height={150}
+                          className="h-32 md:h-24 w-auto object-contain opacity-95"
+                        />
+                      </div>
+                    )}
+                    <h4
+                      className={`text-2xl md:text-4xl uppercase italic mt-6 font-bold mb-5 tracking-tight leading-tight ${tier.accent}`}>
+                      {tier.title}
+                    </h4>
                   </div>
-
-                  <h3
-                    className={`text-xs font-bold uppercase tracking-[0.2em] mb-3 ${level.accent}`}>
-                    {level.name}
-                  </h3>
-                  <h4 className="text-3xl font-bold mb-6 tracking-tight leading-none text-foreground">
-                    {level.title}
-                  </h4>
-                  <p className="text-muted-foreground leading-relaxed mb-10 text-sm italic">
-                    &quot;{level.desc}&quot;
-                  </p>
-
+                  <div>
+                    <h3
+                      className={
+                        " whitespace-nowrap text-xl md:text-2xl font-bold uppercase tracking-[0.12em] italic leading-none mb-1"
+                      }>
+                      {tier.label}
+                    </h3>
+                  </div>
+                  <div>
+                    <h5 className="mb-8 text-md italic">{tier.value}</h5>
+                  </div>
                   <ul className="space-y-4 mb-8">
-                    {level.benefits.map((benefit, i) => (
+                    {tier.bullets.map((b, i) => (
                       <li
                         key={i}
-                        className="flex items-center gap-3 text-xs font-bold uppercase tracking-tight text-foreground/80">
-                        <ShieldCheck className="h-4 w-4 text-primary" />
-                        {benefit}
+                        className="flex items-start gap-3 text-sm text-muted-foreground leading-relaxed">
+                        <span className="mt-0.5 shrink-0">
+                          <CheckCircle2 className="h-5 w-5 text-primary" />
+                        </span>
+                        <span>{b}</span>
                       </li>
                     ))}
                   </ul>
-                </div>
-
-                <div className="pt-8 border-t border-dashed border-border flex justify-between items-center">
-                  <span className="text-xs font-bold text-foreground font-mono uppercase tracking-tighter">
-                    {level.commit}
-                  </span>
-                  <div className="w-8 h-8 rounded-full border border-primary/20 flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-all">
-                    <ArrowUpRight className="h-4 w-4" />
-                  </div>
                 </div>
               </motion.div>
             );
           })}
         </div>
 
-        {/* Closing High-Level Donor Note */}
-        <div className="flex flex-col md:flex-row items-center justify-between p-12 bg-muted/30 rounded-[3rem] border border-border gap-8">
-          <div className="max-w-md">
-            <h5 className="text-xl font-bold mb-2">
-              Institutional Partnerships
-            </h5>
-            <p className="text-sm text-muted-foreground">
-              For family offices, institutional donors, or large-scale corporate
-              foundations seeking a custom engagement roadmap.
-            </p>
-          </div>
-          <a
-            href="#contact"
-            className="text-sm font-bold uppercase tracking-widest text-primary hover:underline underline-offset-8 flex items-center gap-2">
-            Schedule a Briefing <ArrowUpRight className="h-4 w-4" />
-          </a>
+        {/* Closing Statement */}
+        <div className="p-12 bg-muted/30 rounded-[3rem] border border-border">
+          <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-4xl">
+            Every partnership tier directly funds free expert assessments, staff
+            training, and critical safety upgrades for under-resourced schools.
+          </p>
         </div>
       </div>
     </section>
