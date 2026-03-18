@@ -1,30 +1,29 @@
+import { Suspense } from "react";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import Certification from "@/components/landingpage/Certification";
 import CTA from "@/components/landingpage/CTA";
 import Hero from "@/components/landingpage/Hero";
-import Sponsership from "@/components/landingpage/Sponsers";
-import Services from "@/components/landingpage/Services";
+import Sponsership from "@/components/landingpage/Sponsership";
+import ImpactFramework from "@/components/landingpage/ImpactFramework";
 import FiscalGovernance from "@/components/landingpage/FiscalGoverance";
 import MarketReality from "@/components/landingpage/MarketReality";
 
 export default function Home() {
   return (
-    <div className=" ">
-      {/* Header / simple nav */}
-
-      {/* Main content */}
+    <div>
       <main>
-        <Hero />
-        <MarketReality />
-        <Services />
-        <Sponsership />
-        {/* <Certification /> replace with coporate sponsership and donors...  */}
+        <Suspense fallback={null}>
+          <Hero />
+          <MarketReality />
+          <ImpactFramework />
+          <Sponsership />
+          <FiscalGovernance />
+          <CTA />
 
-        <FiscalGovernance />
-        <CTA />
-        <Contact />
+          <Contact />
+        </Suspense>
       </main>
+
       <Footer />
     </div>
   );

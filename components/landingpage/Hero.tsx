@@ -2,48 +2,49 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
 import {
   TrendingUp,
   Target,
   BarChart3,
-  ChevronRight,
   PieChart,
   AlertCircle,
   ShieldAlert,
 } from "lucide-react";
 import { HeroVideoBackground } from "./HeroVideoBackground";
+import { SchoolCTA } from "../SchoolCTA";
+import { PartnerCTA } from "../PartnerCTA";
 
-const INVESTMENT_POINTS = [
+const IMPACT_POINTS = [
   {
     icon: Target,
     title: "THE GAP",
-    desc: "Most districts receive at most one formal safety assessment in a year, if any, and critical recommendations often go unfunded. Current security hardware, monitoring, and access-control upgrades are priced far beyond what under-resourced schools can sustain.",
+    desc: "Most districts receive little to no formal safety assessment support, and critical recommendations often go unfunded or delayed beyond the point of need.",
   },
   {
     icon: BarChart3,
     title: "SCALABLE IMPACT",
-    desc: "Code Red acts as a force multiplier by standardizing school safety assessments, training local staff, and brokering donated or discounted technology—allowing each dollar invested to protect multiple campuses instead of just one.",
+    desc: "Code Red standardizes assessments, training, and implementation support so each partnership and deployment can protect multiple campuses, not just one.",
   },
   {
     icon: TrendingUp,
     title: "LAUNCH PHASE",
-    desc: "We are in our early launch phase, operating with a lean team and clear three-year targets: 150 schools assessed, 5,000+ educators trained, and at least $250,000 in safety technology brokered to high-need campuses.",
+    desc: "We are building a national framework to expand assessments, staff readiness, and safety upgrades for under-resourced K–12 schools.",
   },
 ];
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
+    <section className="relative flex min-h-screen items-center overflow-hidden pt-20">
       <HeroVideoBackground />
-      <div className="container relative z-10 mx-auto px-6 lg:px-8 py-8">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* LEFT COLUMN: The Pitch */}
+
+      <div className="container relative z-10 mx-auto px-6 py-8 lg:px-8">
+        <div className="grid items-center gap-12 lg:grid-cols-2">
+          {/* LEFT COLUMN */}
           <div className="max-w-3xl">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="w-full max-w-162.5 mb-12">
+              className="mb-12 w-full max-w-162.5">
               <Image
                 src="/Code_Red_Approved_Logo_Designs.png"
                 alt="Code Red Safe Schools Initiative"
@@ -58,13 +59,13 @@ const Hero = () => {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3 }}
-              className="inline-flex items-center gap-3 border-l-4 border-primary bg-black/60 backdrop-blur-md px-4 py-2 mb-8">
+              className="mb-8 inline-flex items-center gap-3 border-l-4 border-primary bg-black/60 px-4 py-2 backdrop-blur-md">
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
               </span>
               <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary">
-                Pre-Launch: Pilot Funding Round Now Open
+                National Pilot Intake Now Open
               </span>
             </motion.div>
 
@@ -72,81 +73,64 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}>
-              <h1 className="text-5xl md:text-7xl xl:text-8xl font-black tracking-tighter text-primary-foreground  uppercase mb-6">
+              <h1 className="mb-6 text-5xl font-black uppercase tracking-tighter text-primary-foreground md:text-7xl xl:text-8xl">
                 RAISING THE STANDARD <br />
-                <span className="text-primary text-6xl italic">
-                  {" "}
+                <span className="text-6xl italic text-primary md:text-7xl xl:text-8xl">
                   Of School Safety.
                 </span>
               </h1>
 
-              <div className="flex items-center gap-4 mb-8">
-                {/* <div className="h-[2px] w-12 bg-primary" /> */}
-                <p className="text-xl md:text-2xl text-primary-foreground font-bold tracking-tight uppercase">
-                  Professional security assessments and training for K–12
-                  schools at no cost to districts.
+              <div className="mb-8 flex items-center gap-4">
+                <p className="text-xl font-bold uppercase tracking-tight text-primary-foreground md:text-2xl">
+                  Professional security assessments, readiness planning, and
+                  training support for K–12 schools.
                 </p>
               </div>
 
-              <p className="max-w-xl text-lg text-primary-foreground/70 leading-relaxed mb-10 border-l border-white/10 pl-6">
-                Code Red is an emerging 501(c)(3) engineered to bridge the gap
-                between reactive security and proactive readiness. Join us as a
-                Founding Partner to launch our national pilot framework.
+              <p className="mb-10 max-w-xl border-l border-white/10 pl-6 text-lg leading-relaxed text-primary-foreground/70">
+                Code Red helps schools strengthen safety readiness while giving
+                partners a clear path to fund, support, and scale measurable
+                protection across real campuses.
               </p>
             </motion.div>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-16">
-              <Button
-                asChild
-                size="lg"
-                className="h-16 px-8 rounded-full text-lg font-black uppercase tracking-tighter group">
-                <a href="#contact" className="flex items-center gap-2">
-                  Fund the Initiative
-                  <ChevronRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-                </a>
-              </Button>
-              {/* <Button
-                asChild
-                variant="outline"
-                size="lg"
-                className="h-16 px-8 rounded-full border-white/20 bg-white/5 text-white backdrop-blur-md hover:bg-white hover:text-black transition-all text-lg font-black uppercase tracking-tighter">
-                <a href="#pro-forma">Review the Strategic Prospectus</a>
-              </Button> */}
+              <SchoolCTA />
+              <PartnerCTA />
             </div>
           </div>
 
-          {/* RIGHT COLUMN: Impact Data Display */}
-          <div className="hidden lg:flex justify-center items-center relative">
+          {/* RIGHT COLUMN */}
+          <div className="relative hidden items-center justify-center lg:flex">
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.8, duration: 1 }}
-              className="relative w-full max-w-125 aspect-square rounded-full border border-white/10 flex items-center justify-center">
+              className="relative aspect-square w-full max-w-125 rounded-full border border-white/10 flex items-center justify-center">
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
                 className="absolute inset-0 rounded-full border-2 border-dashed border-primary/20"
               />
 
-              <div className="relative z-10 w-full p-8 space-y-4">
+              <div className="relative z-10 w-full space-y-4 p-8">
                 <motion.div
                   whileHover={{ x: -10 }}
-                  className="bg-black/80 backdrop-blur-xl border border-white/10 p-5 rounded-2xl flex items-center gap-4 cursor-default">
-                  <div className="h-10 w-10 rounded-lg bg-primary/20 flex items-center justify-center shrink-0">
+                  className="cursor-default rounded-2xl border border-white/10 bg-black/80 p-5 backdrop-blur-xl flex items-center gap-4">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/20">
                     <ShieldAlert className="h-5 w-5 text-primary" />
                   </div>
                   <div>
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-primary mb-0.5">
+                    <p className="mb-0.5 text-[10px] font-bold uppercase tracking-widest text-primary">
                       National Risk Snapshot
                     </p>
-                    <p className="text-white font-bold text-xl underline underline-offset-4 decoration-red-500  ">
+                    <p className="text-xl font-bold text-white underline decoration-red-500 underline-offset-4">
                       $1.3M
                     </p>
-                    <p className="text-white font-bold text-lg  leading-tight tracking-tight">
+                    <p className="text-lg font-bold leading-tight tracking-tight text-white">
                       Annual Cost of School Violence
                     </p>
-                    <p className="text-white text-[15px]  leading-tight tracking-tight"></p>
-                    <p className="text-[9px] text-white/50 uppercase font-mono tracking-tighter">
+                    <p className="text-[9px] font-mono uppercase tracking-tighter text-white/50">
                       Source: National Center for Education Statistics (NCES)
                     </p>
                   </div>
@@ -154,93 +138,69 @@ const Hero = () => {
 
                 <motion.div
                   whileHover={{ x: 10 }}
-                  className="bg-black/80 backdrop-blur-xl border border-white/10 p-5 rounded-2xl translate-x-12 flex items-center gap-4 cursor-default">
-                  <div className="h-10 w-10 rounded-lg bg-primary/20 flex items-center justify-center shrink-0">
+                  className="translate-x-12 cursor-default rounded-2xl border border-white/10 bg-black/80 p-5 backdrop-blur-xl flex items-center gap-4">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/20">
                     <PieChart className="h-5 w-5 text-primary" />
                   </div>
                   <div>
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-primary mb-0.5">
+                    <p className="mb-0.5 text-[10px] font-bold uppercase tracking-widest text-primary">
                       National Risk Snapshot
                     </p>
-                    <p className="text-white font-bold text-xl underline underline-offset-4 decoration-red-500  ">
+                    <p className="text-xl font-bold text-white underline decoration-red-500 underline-offset-4">
                       1,626
                     </p>
-                    <p className="text-white font-bold text-lg  leading-tight tracking-tight">
+                    <p className="text-lg font-bold leading-tight tracking-tight text-white">
                       School shooting incidents
                     </p>
-                    <p className="text-white text-[15px]  leading-tight tracking-tight"></p>
-                    <p className="text-[9px] text-white/50 uppercase font-mono tracking-tighter">
+                    <p className="text-[9px] font-mono uppercase tracking-tighter text-white/50">
                       Source: K–12 School Shooting Database (summary)
                     </p>
                   </div>
                 </motion.div>
 
                 <motion.div
-                  whileHover={{ x: 10 }}
-                  className="bg-black/80 backdrop-blur-xl border border-white/10 p-5 rounded-2xl translate-x-12 flex items-center gap-4 cursor-default">
-                  <div className="h-10 w-10 rounded-lg bg-primary/20 flex items-center justify-center shrink-0">
+                  whileHover={{ x: -10 }}
+                  className="cursor-default rounded-2xl border border-white/10 bg-black/80 p-5 backdrop-blur-xl flex items-center gap-4">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/20">
                     <AlertCircle className="h-5 w-5 text-primary" />
                   </div>
                   <div>
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-primary mb-0.5">
+                    <p className="mb-0.5 text-[10px] font-bold uppercase tracking-widest text-primary">
                       Behavioral Reality
                     </p>
-                    <p className="text-white font-bold text-xl underline underline-offset-4 decoration-red-500  ">
+                    <p className="text-xl font-bold text-white underline decoration-red-500 underline-offset-4">
                       88%
                     </p>
-                    <p className="text-white font-bold text-lg  leading-tight tracking-tight">
+                    <p className="text-lg font-bold leading-tight tracking-tight text-white">
                       of school safety incidents are behavioral
                     </p>
-                    <p className="text-white text-[15px]  leading-tight tracking-tight"></p>
-                    <p className="text-[9px] text-white/50 uppercase font-mono tracking-tighter">
+                    <p className="text-[9px] font-mono uppercase tracking-tighter text-white/50">
                       Source: 2025 K–12 School Safety Trends Report (CENTEGIX)
                     </p>
                   </div>
                 </motion.div>
-
-                {/* <motion.div
-                  whileHover={{ x: 10 }}
-                  className="bg-black/80 backdrop-blur-xl border border-white/10 p-5 rounded-2xl translate-x-12 flex items-center gap-4 cursor-default">
-                  <div className="h-10 w-10 rounded-lg bg-primary/20 flex items-center justify-center shrink-0">
-                    <AlertCircle className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-primary mb-0.5">
-                      Behavioral Reality
-                    </p>
-                    <p className="text-white font-bold text-xl underline underline-offset-4 decoration-red-500  ">
-                      88%
-                    </p>
-                    <p className="text-white font-bold text-lg  leading-tight tracking-tight">
-                      of school safety incidents are behavioral
-                    </p>
-                    <p className="text-white text-[15px]  leading-tight tracking-tight"></p>
-                    <p className="text-[9px] text-white/50 uppercase font-mono tracking-tighter">
-                      Source: 2025 K–12 School Safety Trends Report (CENTEGIX)
-                    </p>
-                  </div>
-                </motion.div> */}
               </div>
             </motion.div>
           </div>
         </div>
 
-        {/* Proof Grid (Investors look for these three things) */}
+        {/* BOTTOM PROOF GRID */}
         <div className="mt-12 grid gap-6 sm:grid-cols-3">
-          {INVESTMENT_POINTS.map((item, idx) => {
+          {IMPACT_POINTS.map((item, idx) => {
             const Icon = item.icon;
+
             return (
               <motion.div
                 key={idx}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1 + idx * 0.1 }}
-                className="group relative overflow-hidden rounded-2xl bg-black/50 border border-white/10 p-6 backdrop-blur-sm">
-                <Icon className="h-6 w-6 text-primary mb-4" />
-                <div className="text-xs font-black tracking-widest text-primary-foreground mb-2">
+                className="group relative overflow-hidden rounded-2xl border border-white/10 bg-black/50 p-6 backdrop-blur-sm">
+                <Icon className="mb-4 h-6 w-6 text-primary" />
+                <div className="mb-2 text-xs font-black tracking-widest text-primary-foreground">
                   {item.title}
                 </div>
-                <div className="text-sm text-primary-foreground leading-snug">
+                <div className="text-sm leading-snug text-primary-foreground">
                   {item.desc}
                 </div>
               </motion.div>
@@ -249,7 +209,7 @@ const Hero = () => {
         </div>
       </div>
 
-      <div className="absolute inset-0 bg-linear-to-t from-background via-transparent to-transparent z-5" />
+      <div className="absolute inset-0 z-5 bg-linear-to-t from-background via-transparent to-transparent" />
     </section>
   );
 };

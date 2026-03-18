@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { motion } from "framer-motion";
 import {
   FileSpreadsheet,
@@ -11,6 +10,8 @@ import {
   LineChart,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { SchoolCTA } from "../SchoolCTA";
+import { PartnerCTA } from "../PartnerCTA";
 
 const corporatePhases = [
   {
@@ -63,26 +64,26 @@ const corporatePhases = [
 
 export default function ImpactFramework() {
   return (
-    <section className="relative py-32 bg-background overflow-hidden border-t border-border/50">
+    <section className="relative overflow-hidden border-t border-border/50 bg-background py-32">
       {/* Subtle Grid Pattern for Corporate Feel */}
-      <div className="absolute inset-0 opacity-[0.015] pointer-events-none [background-image:linear-gradient(to_right,#888_1px,transparent_1px),linear-gradient(to_bottom,#888_1px,transparent_1px)] [background-size:40px_40px]" />
+      <div className="absolute inset-0 pointer-events-none opacity-[0.015] bg-[linear-gradient(to_right,#888_1px,transparent_1px),linear-gradient(to_bottom,#888_1px,transparent_1px)] bg-size-[40px_40px]" />
 
       <div className="container relative z-10 mx-auto px-6">
         {/* Corporate Header */}
-        <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-12 mb-32">
+        <div className="mb-32 flex flex-col items-start justify-between gap-12 lg:flex-row lg:items-end">
           <div className="max-w-3xl">
             <Badge
               variant="outline"
-              className="mb-6 rounded-none border-l-4 border-l-primary border-y-0 border-r-0 px-4 py-1 text-primary uppercase tracking-[0.2em] text-[10px] font-bold bg-primary/5">
+              className="mb-6 rounded-none border-y-0 border-r-0 border-l-4 border-l-primary bg-primary/5 px-4 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-primary">
               Strategic Methodology
             </Badge>
-            <h2 className="text-5xl md:text-7xl font-bold tracking-tight uppercase leading-[0.9]">
+            <h2 className="text-5xl font-bold uppercase leading-[0.9] tracking-tight md:text-7xl">
               Our Operational <br />
-              <span className="text-primary italic">Framework.</span>
+              <span className="italic text-primary">Framework.</span>
             </h2>
           </div>
           <div className="max-w-md">
-            <p className="text-lg text-muted-foreground leading-relaxed font-medium border-l border-primary/20 pl-6">
+            <p className="border-l border-primary/20 pl-6 text-lg font-medium leading-relaxed text-muted-foreground">
               Code Red converts philanthropic capital into measurable
               institutional infrastructure, ensuring long-term sustainability
               and student protection.
@@ -91,7 +92,7 @@ export default function ImpactFramework() {
         </div>
 
         {/* Phase Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border border-y border-border mb-20">
+        <div className="mb-20 grid grid-cols-1 gap-px border-y border-border bg-border md:grid-cols-3">
           {corporatePhases.map((phase, idx) => (
             <motion.div
               key={idx}
@@ -100,25 +101,24 @@ export default function ImpactFramework() {
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
               className="group relative bg-background p-12 transition-colors duration-500 hover:bg-muted/30">
-              <span className="absolute top-4 right-8 text-8xl font-bold text-muted/10 leading-none select-none">
+              <span className="pointer-events-none absolute right-8 top-4 select-none text-8xl font-bold leading-none text-muted/10">
                 {phase.step}
               </span>
 
               <div className="relative z-10">
-                {/* <h3 className="text-xs font-bold text-primary uppercase tracking-widest mb-4">
-                  Step {phase.step}
-                </h3> */}
-                <h4 className="text-2xl font-bold mb-6 tracking-tight">
+                <h4 className="mb-6 text-2xl font-bold tracking-tight">
                   {phase.title}
                 </h4>
-                <p className="text-muted-foreground mb-8 text-sm leading-relaxed italic">
+
+                <p className="mb-8 text-sm italic leading-relaxed text-muted-foreground">
                   &quot;{phase.description}&quot;
                 </p>
 
-                <p className="text-muted-foreground mb-8 text-sm leading-relaxed italic">
+                <p className="mb-8 text-sm italic leading-relaxed text-muted-foreground">
                   {phase.target}
                 </p>
-                <ul className="space-y-4 mb-10">
+
+                <ul className="mb-10 space-y-4">
                   {phase.features.map((feature, i) => (
                     <li
                       key={i}
@@ -129,8 +129,8 @@ export default function ImpactFramework() {
                   ))}
                 </ul>
 
-                <div className="pt-8 border-t border-dashed border-border">
-                  <p className="text-[10px] font-bold text-primary uppercase tracking-widest mb-1">
+                <div className="border-t border-dashed border-border pt-8">
+                  <p className="mb-1 text-[10px] font-bold uppercase tracking-widest text-primary">
                     Value Proposition
                   </p>
                   <p className="text-sm font-bold text-foreground">
@@ -143,16 +143,16 @@ export default function ImpactFramework() {
         </div>
 
         {/* Governance & Alignment Blocks */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div className="flex gap-8 p-10 bg-muted/20 rounded-3xl border border-border group hover:border-primary/20 transition-all duration-300">
-            <div className="flex-shrink-0 w-12 h-12 bg-background flex items-center justify-center rounded-xl border border-border group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+          <div className="group flex gap-8 rounded-3xl border border-border bg-muted/20 p-10 transition-all duration-300 hover:border-primary/20">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-border bg-background transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
               <Network className="h-5 w-5" />
             </div>
             <div>
-              <h4 className="text-lg font-bold mb-2 uppercase tracking-tight">
+              <h4 className="mb-2 text-lg font-bold uppercase tracking-tight">
                 Stakeholder Alignment
               </h4>
-              <p className="text-sm text-muted-foreground leading-relaxed">
+              <p className="text-sm leading-relaxed text-muted-foreground">
                 We foster strategic collaboration between school boards,
                 parents, and safety professionals to create a unified
                 institutional safety culture.
@@ -160,19 +160,43 @@ export default function ImpactFramework() {
             </div>
           </div>
 
-          <div className="flex gap-8 p-10 bg-muted/20 rounded-3xl border border-border group hover:border-primary/20 transition-all duration-300">
-            <div className="flex-shrink-0 w-12 h-12 bg-background flex items-center justify-center rounded-xl border border-border group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+          <div className="group flex gap-8 rounded-3xl border border-border bg-muted/20 p-10 transition-all duration-300 hover:border-primary/20">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-border bg-background transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
               <LineChart className="h-5 w-5" />
             </div>
             <div>
-              <h4 className="text-lg font-bold mb-2 uppercase tracking-tight">
+              <h4 className="mb-2 text-lg font-bold uppercase tracking-tight">
                 Fiscal Governance
               </h4>
-              <p className="text-sm text-muted-foreground leading-relaxed">
+              <p className="text-sm leading-relaxed text-muted-foreground">
                 Our model prioritizes transparency and rigorous impact
                 reporting, ensuring every donor dollar is accounted for in
                 measurable safety outcomes.
               </p>
+            </div>
+          </div>
+        </div>
+
+        {/* CTA Row */}
+        <div className="mt-16 rounded-[2.5rem] border border-border bg-muted/20 p-8 md:p-10">
+          <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+            <div className="max-w-3xl">
+              <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-primary">
+                Take the Next Step
+              </p>
+              <h3 className="mb-3 text-2xl font-bold tracking-tight md:text-3xl">
+                Ready to engage with the framework?
+              </h3>
+              <p className="text-base leading-relaxed text-muted-foreground md:text-lg">
+                Schools can request an assessment and readiness conversation.
+                Strategic partners can explore funding, sponsorship, technology,
+                or implementation collaboration.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+              <SchoolCTA />
+              <PartnerCTA />
             </div>
           </div>
         </div>

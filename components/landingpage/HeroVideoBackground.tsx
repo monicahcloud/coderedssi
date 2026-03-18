@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Play } from "lucide-react";
 
 export function HeroVideoBackground() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -64,7 +63,7 @@ export function HeroVideoBackground() {
 
       {/* Overlays for readability */}
       <div className="absolute inset-0 bg-black/60" />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/10" />
+      <div className="absolute inset-0 bg-linear-to-r from-black/85 via-black/55 to-black/10" />
     </div>
   );
 }

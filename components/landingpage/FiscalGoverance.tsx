@@ -3,63 +3,66 @@
 import { motion } from "framer-motion";
 import { ShieldCheck, FileText, LineChart, Scale, Lock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { PartnerCTA } from "../PartnerCTA";
+import { SchoolCTA } from "../SchoolCTA";
 
 const GOVERNANCE_PILLARS = [
   {
     icon: Scale,
     title: "501(c)(3) Integrity",
-    desc: "Strict adherence to federal nonprofit regulations ensuring all capital is deployed toward our mission of student safety.",
+    desc: "Strict adherence to federal nonprofit regulations ensures all capital supports our mission of student safety and school readiness.",
     proof: "Annual independent financial review once revenue exceeds $250,000.",
   },
   {
     icon: LineChart,
     title: "Impact Attribution",
-    desc: "Direct tracking of capital to regional pilot outcomes, providing donors with verifiable data on lives protected.",
+    desc: "Capital is tied directly to measurable pilot outcomes so schools, sponsors, and philanthropic partners can see where impact is happening.",
     proof:
       "Quarterly KPI dashboards tracking readiness scores, staff trained, and equipment value deployed.",
   },
   {
     icon: FileText,
     title: "Audit Transparency",
-    desc: "Annual third-party financial reviews and open-book reporting for our Founding Alliance members.",
+    desc: "Open-book reporting and documented accountability standards create trust across school leaders, donors, and founding alliance members.",
     proof: "Goal: maintain administrative expenses under 20% of total budget.",
   },
 ];
 
 export default function FiscalGovernance() {
   return (
-    <section className="py-24 bg-muted/30 border-t border-border/50 overflow-hidden">
+    <section className="overflow-hidden border-t border-border/50 bg-muted/30 py-24">
       <div className="container mx-auto px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid items-center gap-16 lg:grid-cols-2">
           {/* LEFT: Governance Copy */}
           <div className="space-y-8">
             <Badge
               variant="outline"
-              className="rounded-none border-l-4 border-l-primary border-y-0 border-r-0 px-4 py-1 text-primary uppercase text-[10px] font-bold tracking-[0.2em] bg-primary/5">
+              className="rounded-none border-y-0 border-r-0 border-l-4 border-l-primary bg-primary/5 px-4 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-primary">
               Stewardship & Ethics
             </Badge>
 
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground uppercase leading-[1.1]">
+            <h2 className="text-4xl font-bold uppercase leading-[1.1] tracking-tight text-foreground md:text-5xl">
               A Foundation of <br />
-              <span className="text-primary italic">
+              <span className="italic text-primary">
                 Absolute Transparency.
               </span>
             </h2>
 
-            <p className="text-lg text-muted-foreground leading-relaxed max-w-xl">
-              We understand that philanthropic capital is an investment in
-              social change. Our governance model is designed to provide
-              institutional-grade accountability for every dollar committed to
-              our 2026 pilot launch.
+            <p className="max-w-xl text-lg leading-relaxed text-muted-foreground">
+              Whether you are a school exploring participation or a corporate
+              partner evaluating investment, our governance model is built to
+              provide institutional-grade accountability, measurable outcomes,
+              and clear stewardship of every dollar committed.
             </p>
 
-            <div className="flex items-center gap-6 pt-4">
+            <div className="flex flex-wrap items-center gap-6 pt-2">
               <div className="flex items-center gap-2">
                 <Lock className="h-5 w-5 text-primary" />
                 <span className="text-xs font-bold uppercase tracking-widest">
                   Secure Auditing
                 </span>
               </div>
+
               <div className="flex items-center gap-2">
                 <ShieldCheck className="h-5 w-5 text-primary" />
                 <span className="text-xs font-bold uppercase tracking-widest">
@@ -67,31 +70,52 @@ export default function FiscalGovernance() {
                 </span>
               </div>
             </div>
+
+            {/* CTA Block */}
+            <div className="space-y-4 pt-4">
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                Ready to Engage?
+              </p>
+
+              <div className="flex flex-col gap-4 sm:flex-row">
+                <SchoolCTA />
+
+                <PartnerCTA />
+              </div>
+
+              <p className="max-w-xl text-sm leading-relaxed text-muted-foreground">
+                Schools can request an assessment conversation. Corporate and
+                philanthropic partners can explore sponsorship, pilot funding,
+                and strategic collaboration.
+              </p>
+            </div>
           </div>
 
           {/* RIGHT: Pillar Grid */}
           <div className="grid gap-4">
             {GOVERNANCE_PILLARS.map((pillar, idx) => (
               <motion.div
-                key={idx}
+                key={pillar.title}
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ delay: idx * 0.1 }}
                 viewport={{ once: true }}
-                className="group p-6 bg-background border border-border rounded-2xl hover:border-primary/50 transition-all duration-300">
+                className="group rounded-2xl border border-border bg-background p-6 transition-all duration-300 hover:border-primary/50">
                 <div className="flex items-start gap-5">
-                  <div className="mt-1 p-3 bg-muted rounded-xl group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                  <div className="mt-1 rounded-xl bg-muted p-3 transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
                     <pillar.icon className="h-5 w-5" />
                   </div>
+
                   <div>
-                    <h4 className="text-lg font-bold mb-1 group-hover:text-primary transition-colors">
+                    <h4 className="mb-1 text-lg font-bold transition-colors group-hover:text-primary">
                       {pillar.title}
                     </h4>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
+
+                    <p className="text-sm leading-relaxed text-muted-foreground">
                       {pillar.desc}
                     </p>
 
-                    <p className="text-xs font-semibold text-primary mt-2">
+                    <p className="mt-2 text-xs font-semibold text-primary">
                       {pillar.proof}
                     </p>
                   </div>

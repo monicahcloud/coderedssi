@@ -40,8 +40,8 @@ const FinalCTA = () => {
             </Badge>
 
             <h2 className="text-4xl sm:text-6xl lg:text-8xl font-black tracking-tighter text-background uppercase leading-[0.9] md:leading-[0.85] mb-6 md:mb-8">
-              Build the <br />
-              <span className="text-primary italic">Foundation.</span>
+              Become a <br />
+              <span className="text-primary italic">Partner.</span>
             </h2>
 
             <p className="max-w-2xl mx-auto text-base sm:text-lg md:text-2xl text-background/60 leading-relaxed font-medium mb-6 md:mb-8 text-center">
