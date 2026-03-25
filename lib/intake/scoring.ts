@@ -87,7 +87,7 @@ export function calculateIntakeRiskScore(
     score += 0.6;
   }
 
-  if (values.physicalSecurity.hasVulnerabilities) {
+  if (values.systemsResources.physicalSecurity.hasVulnerabilities) {
     score += 0.5;
   }
 
