@@ -50,11 +50,12 @@ export function sanitizeIntakeValues(
       incidentOther: values.incidents.incidentOther?.trim() ?? "",
       topConcerns: values.incidents.topConcerns?.trim() ?? "",
     },
-    physicalSecurity: {
-      ...values.physicalSecurity,
+    systemsResources: {
+      ...values.systemsResources,
       vulnerabilitiesDescription:
-        values.physicalSecurity.vulnerabilitiesDescription?.trim() ?? "",
+        values.systemsResources.vulnerabilitiesDescription?.trim() ?? "",
     },
+
     capacityBarriers: {
       ...values.capacityBarriers,
       barriersOther: values.capacityBarriers.barriersOther?.trim() ?? "",
