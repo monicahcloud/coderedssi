@@ -197,16 +197,14 @@ export default function ImpactFramework() {
 
         {/* CTA Row */}
         <div className="mt-16 rounded-[2.5rem] border border-border bg-muted/20 p-8 md:p-10">
-          <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-            <div className="w-full max-w-xl">
+          <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+            <div className="max-w-3xl">
               <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-primary">
                 Take the Next Step
               </p>
-
               <h3 className="mb-3 text-2xl font-bold tracking-tight md:text-3xl">
                 Ready to engage with the framework?
               </h3>
-
               <p className="text-base leading-relaxed text-muted-foreground md:text-lg">
                 Schools can request an assessment and readiness conversation.
                 Strategic partners can explore funding, sponsorship, technology,
@@ -214,16 +212,9 @@ export default function ImpactFramework() {
               </p>
             </div>
 
-            <div className="w-full lg:max-w-xl">
-              <div className="grid grid-cols-1 gap-3">
-                <div className="min-w-0">
-                  <SchoolCTA className="w-full" />
-                </div>
-
-                <div className="min-w-0">
-                  <PartnerCTA className="w-full" />
-                </div>
-              </div>
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+              <SchoolCTA />
+              <PartnerCTA />
             </div>
           </div>
         </div>

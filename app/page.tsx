@@ -1,12 +1,12 @@
 import { Suspense } from "react";
-import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import CTA from "@/components/landingpage/CTA";
 import Hero from "@/components/landingpage/Hero";
 import Sponsership from "@/components/landingpage/Sponsership";
-import ImpactFramework from "@/components/landingpage/ImpactFramework";
 import FiscalGovernance from "@/components/landingpage/FiscalGoverance";
 import MarketReality from "@/components/landingpage/MarketReality";
+import ContactSection from "@/components/contact/ContactSection";
+import ImpactFramework from "@/components/landingpage/ImpactFramework";
 
 export default function Home() {
   return (
@@ -19,8 +19,7 @@ export default function Home() {
           <Sponsership />
           <FiscalGovernance />
           <CTA />
-
-          <Contact />
+          <ContactSection />
         </Suspense>
       </main>
 

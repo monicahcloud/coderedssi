@@ -17,7 +17,6 @@ import {
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import Image from "next/image";
-import Link from "next/link";
 import { PartnerCTA } from "../PartnerCTA";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
@@ -26,7 +25,7 @@ const HOW_PARTNERSHIPS_WORK = [
   "Share recognition, data, and impact reporting with your stakeholders.",
   "Contribute expertise, solutions, funding, or equipment (donated or at-cost).",
   "Participate in pilot programs and proof-of-concept deployments with real districts.",
-  "Commit to collaboration over competition among vendors and stakeholders.",
+  "Collaborate on local and state wide initiatives.",
 ];
 
 const PARTNERSHIP_TIERS = [
@@ -192,7 +191,7 @@ export default function FoundingAlliance() {
                 Partnership Model
               </p>
               <h3 className="text-center text-2xl font-bold tracking-tight md:text-3xl">
-                What partners do
+                How Partners Support
               </h3>
             </div>
           </div>
@@ -307,12 +306,6 @@ export default function FoundingAlliance() {
                       </ul>
                     </div>
 
-                    {/* <div className="rounded-2xl bg-muted/50 p-4">
-                      <p className="text-sm leading-relaxed text-muted-foreground">
-                        {tier.details.support}
-                      </p>
-                    </div> */}
-
                     <Button
                       type="button"
                       className="w-full rounded-xl"
@@ -347,16 +340,6 @@ export default function FoundingAlliance() {
 
             <div className="flex flex-col gap-3 sm:flex-row">
               <PartnerCTA />
-
-              {/* <Button
-                type="button"
-                variant="ghost"
-                size="lg"
-                onClick={() => router.push(`${pathname}?type=partner#contact`)}
-                className="rounded-full px-8 text-sm font-black uppercase tracking-[0.12em]">
-                Request Tier Details
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button> */}
             </div>
           </div>
         </div>

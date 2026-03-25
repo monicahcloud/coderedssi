@@ -3,13 +3,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import {
-  ArrowUpRight,
-  FileText,
-  Zap,
-  ShieldCheck,
-  CheckCircle2,
-} from "lucide-react";
+import { ArrowUpRight, Zap, CheckCircle2 } from "lucide-react";
 
 const CTA_POINTS = [
   "Year 1: 25 schools assessed, 1,000 staff trained.",
@@ -21,7 +15,7 @@ const FinalCTA = () => {
   return (
     <section className="relative overflow-hidden bg-foreground py-20 sm:py-24 md:py-32">
       {/* Background Architectural Grid */}
-      <div className="absolute inset-0 opacity-[0.05] pointer-events-none [background-image:linear-gradient(to_right,#888_1px,transparent_1px),linear-gradient(to_bottom,#888_1px,transparent_1px)] [background-size:40px_40px]" />
+      <div className="absolute inset-0 opacity-[0.05] pointer-events-none bg-[linear-gradient(to_right,#888_1px,transparent_1px),linear-gradient(to_bottom,#888_1px,transparent_1px)] bg-size-[40px_40px]" />
 
       {/* Top Accent Line */}
       <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-transparent via-primary to-transparent opacity-50" />
@@ -77,45 +71,8 @@ const FinalCTA = () => {
                   <ArrowUpRight className="h-5 w-5 md:h-6 md:w-6 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                 </a>
               </Button>
-
-              {/* <Button
-                asChild
-                variant="outline"
-                size="lg"
-                className="h-16 md:h-20 px-8 md:px-12 rounded-full border-background/20 bg-transparent text-background text-lg md:text-xl font-black uppercase tracking-tighter hover:bg-background/5 transition-all w-full sm:w-auto">
-                <a
-                  href="#contact"
-                  className="flex items-center justify-center gap-3">
-                  <FileText className="h-5 w-5 md:h-6 md:w-6" />
-                  Request Prospectus
-                </a>
-              </Button> */}
             </div>
           </motion.div>
-
-          {/* Bottom Trust bar - Mobile Optimized */}
-          <div className="mt-16 md:mt-24 pt-10 border-t border-background/10">
-            <div className="flex flex-wrap items-center justify-center gap-6 md:gap-12 opacity-40">
-              <div className="flex items-center gap-2 md:gap-3">
-                <ShieldCheck className="h-4 w-4 md:h-5 md:w-5 text-primary" />
-                <span className="text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-background">
-                  501(c)(3) Transparency
-                </span>
-              </div>
-              <div className="flex items-center gap-2 md:gap-3">
-                <ShieldCheck className="h-4 w-4 md:h-5 md:w-5 text-primary" />
-                <span className="text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-background">
-                  District Attribution
-                </span>
-              </div>
-              <div className="flex items-center gap-2 md:gap-3">
-                <ShieldCheck className="h-4 w-4 md:h-5 md:w-5 text-primary" />
-                <span className="text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-background">
-                  Governance Board Seats
-                </span>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>

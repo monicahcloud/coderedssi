@@ -3,8 +3,12 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Handshake, ChevronRight } from "lucide-react";
+import { cn } from "@/lib/utils";
+type CTAProps = {
+  className?: string;
+};
 
-export function PartnerCTA() {
+export function PartnerCTA({ className }: CTAProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -33,7 +37,11 @@ export function PartnerCTA() {
       variant="outline"
       size="lg"
       onClick={handlePartnerClick}
-      className="h-16 px-8 rounded-full border border-foreground/20 bg-background/60 text-foreground backdrop-blur-md hover:bg-foreground hover:text-background transition-all text-lg font-black uppercase tracking-tighter group">
+      className={cn(
+        "flex h-14 w-full items-center justify-center rounded-full px-5 text-center text-sm font-bold uppercase tracking-[0.04em]",
+        "border border-border bg-background text-foreground transition hover:border-primary hover:text-primary-foreground",
+        className,
+      )}>
       <span className="flex items-center gap-2">
         <Handshake className="h-5 w-5" />
         Become a Partner

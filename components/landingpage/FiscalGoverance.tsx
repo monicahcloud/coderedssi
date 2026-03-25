@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ShieldCheck, FileText, LineChart, Scale, Lock } from "lucide-react";
+import { FileText, LineChart, Scale } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { PartnerCTA } from "../PartnerCTA";
 import { SchoolCTA } from "../SchoolCTA";
@@ -49,27 +49,11 @@ export default function FiscalGovernance() {
             </h2>
 
             <p className="max-w-xl text-lg leading-relaxed text-muted-foreground">
-              Whether you are a school exploring participation or a corporate
-              partner evaluating investment, our governance model is built to
-              provide institutional-grade accountability, measurable outcomes,
-              and clear stewardship of every dollar committed.
+              We understand that philanthropic capital is an investment in
+              social change. Our governance model is designed to provide
+              institutional- grade accountability for every dollar committed to
+              our mission.
             </p>
-
-            <div className="flex flex-wrap items-center gap-6 pt-2">
-              <div className="flex items-center gap-2">
-                <Lock className="h-5 w-5 text-primary" />
-                <span className="text-xs font-bold uppercase tracking-widest">
-                  Secure Auditing
-                </span>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <ShieldCheck className="h-5 w-5 text-primary" />
-                <span className="text-xs font-bold uppercase tracking-widest">
-                  Public Compliance
-                </span>
-              </div>
-            </div>
 
             {/* CTA Block */}
             <div className="space-y-4 pt-4">
@@ -77,13 +61,17 @@ export default function FiscalGovernance() {
                 Ready to Engage?
               </p>
 
-              <div className="flex flex-col gap-4 sm:flex-row">
-                <SchoolCTA />
+              <div className="grid grid-cols-1 gap-3 ">
+                <div className="min-w-0">
+                  <SchoolCTA className="w-full" />
+                </div>
 
-                <PartnerCTA />
+                <div className="min-w-0">
+                  <PartnerCTA className="w-full" />
+                </div>
               </div>
 
-              <p className="max-w-xl text-sm leading-relaxed text-muted-foreground">
+              <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
                 Schools can request an assessment conversation. Corporate and
                 philanthropic partners can explore sponsorship, pilot funding,
                 and strategic collaboration.

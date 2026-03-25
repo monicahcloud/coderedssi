@@ -31,7 +31,6 @@ export function HeroVideoBackground() {
       await v.play();
       setCanAutoplay(true);
     } catch {
-      // still blocked
       setCanAutoplay(false);
     }
   };
@@ -49,17 +48,6 @@ export function HeroVideoBackground() {
         className="h-full w-full object-cover">
         <source src="/heroVideo.mp4" type="video/mp4" />
       </video>
-
-      {/* If autoplay is blocked, show a tap-to-play overlay */}
-      {/* {!canAutoplay && (
-        <button
-          type="button"
-          onClick={onTapPlay}
-          className="absolute inset-0 flex items-center justify-center bg-black/30"
-          aria-label="Play background video">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/50 px-4 py-3 text-sm font-semibold text-white backdrop-blur"></span>
-        </button>
-      )} */}
 
       {/* Overlays for readability */}
       <div className="absolute inset-0 bg-black/60" />

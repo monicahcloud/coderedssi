@@ -17,8 +17,8 @@ import { PartnerCTA } from "../PartnerCTA";
 const IMPACT_POINTS = [
   {
     icon: Target,
-    title: "THE GAP",
-    desc: "Most districts receive little to no formal safety assessment support, and critical recommendations often go unfunded or delayed beyond the point of need.",
+    title: "WHY CURRENT SOLUTIONS FAIL",
+    desc: "Most districts receive at most one formal safety assessment every 1-3 years, if any, and critical recommendations often go unfunded. Current security hardware, monitoring, and access-control upgrades are priced far beyond what under-resourced schools can sustain.",
   },
   {
     icon: BarChart3,
@@ -38,9 +38,10 @@ const Hero = () => {
       <HeroVideoBackground />
 
       <div className="container relative z-10 mx-auto px-6 py-8 lg:px-8">
-        <div className="grid items-center gap-12 lg:grid-cols-2">
-          {/* LEFT COLUMN */}
-          <div className="max-w-3xl">
+        <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr] xl:grid-cols-[1.15fr_0.85fr]">
+          <div className="w-full max-w-3xl">
+            {/* LEFT COLUMN */}
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -73,17 +74,22 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}>
-              <h1 className="mb-6 text-5xl font-black uppercase tracking-tighter text-primary-foreground md:text-7xl xl:text-8xl">
-                RAISING THE STANDARD <br />
-                <span className="text-6xl italic text-primary md:text-7xl xl:text-8xl">
-                  Of School Safety.
+              <h1 className="mb-6 text-4xl font-black uppercase tracking-tighter text-primary-foreground md:text-4xl xl:text-5xl 2xl:text-6xl">
+                A coordinated,{" "}
+                <span className="italic text-primary whitespace-nowrap">
+                  partner-driven{" "}
+                  <span className="text-primary-foreground">approach</span>
+                </span>
+                <br />
+                <span className="italic text-primary-foreground">
+                  to school protection.
                 </span>
               </h1>
 
               <div className="mb-8 flex items-center gap-4">
                 <p className="text-xl font-bold uppercase tracking-tight text-primary-foreground md:text-2xl">
-                  Professional security assessments, readiness planning, and
-                  training support for K–12 schools.
+                  Helping schools prevent, prepare for, respond to, and recover
+                  from security incidents through a partner-aligned framework.
                 </p>
               </div>
 
@@ -94,9 +100,14 @@ const Hero = () => {
               </p>
             </motion.div>
 
-            <div className="flex flex-col sm:flex-row gap-4 mb-16">
-              <SchoolCTA />
-              <PartnerCTA />
+            <div className="mb-8 flex flex-col gap-4 xl:flex-row xl:items-center">
+              <div className="xl:w-auto">
+                <SchoolCTA className="w-full xl:w-[340px]" />
+              </div>
+
+              <div className="xl:w-auto">
+                <PartnerCTA className="w-full xl:w-[280px]" />
+              </div>
             </div>
           </div>
 

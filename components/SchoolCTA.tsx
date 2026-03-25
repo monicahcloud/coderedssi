@@ -3,8 +3,12 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { School, ChevronRight } from "lucide-react";
+import { cn } from "@/lib/utils";
+type CTAProps = {
+  className?: string;
+};
 
-export function SchoolCTA() {
+export function SchoolCTA({ className }: CTAProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -32,14 +36,11 @@ export function SchoolCTA() {
       type="button"
       size="lg"
       onClick={handleSchoolClick}
-      className="h-16 px-8 rounded-full text-lg font-black uppercase tracking-tighter 
-      bg-primary text-primary-foreground
-      shadow-[0_0_30px_-10px_rgba(var(--primary),0.6)]
-      transition-all duration-300 ease-out
-      hover:scale-[1.03]
-      hover:shadow-[0_0_50px_-5px_rgba(var(--primary),0.9)]
-      active:scale-[0.98]
-      group">
+      className={cn(
+        "flex h-14 w-full items-center justify-center rounded-full px-5 text-center text-sm font-bold uppercase tracking-[0.04em]",
+        "bg-primary text-primary-foreground transition hover:opacity-95",
+        className,
+      )}>
       <span className="flex items-center gap-2">
         <School className="h-5 w-5" />
         Request School Assessment
