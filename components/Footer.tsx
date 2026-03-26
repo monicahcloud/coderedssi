@@ -86,12 +86,12 @@ const Footer = () => {
           </p>
 
           <div className="flex flex-col md:flex-row items-center gap-6">
-            <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-background/5 bg-background/[0.02]">
+            {/* <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-background/5 bg-background/2">
               <div className="h-1.5 w-1.5 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]" />
               <span className="text-[9px] font-black uppercase tracking-[0.2em] text-background/40">
                 System Verified Ready
               </span>
-            </div>
+            </div> */}
 
             <a
               href="https://vitanovadesigns.cloud"

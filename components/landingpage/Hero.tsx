@@ -102,7 +102,7 @@ const Hero = () => {
 
             <div className="mb-8 flex flex-col gap-4 xl:flex-row xl:items-center">
               <div className="xl:w-auto">
-                <SchoolCTA className="w-full xl:w-[340px]" />
+                <SchoolCTA className="w-full xl:w-[280px]" />
               </div>
 
               <div className="xl:w-auto">
@@ -207,10 +207,15 @@ const Hero = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1 + idx * 0.1 }}
                 className="group relative overflow-hidden rounded-2xl border border-white/10 bg-black/50 p-6 backdrop-blur-sm">
-                <Icon className="mb-4 h-6 w-6 text-primary" />
-                <div className="mb-2 text-xs font-black tracking-widest text-primary-foreground">
-                  {item.title}
+                {/* ICON + TITLE ROW */}
+                <div className="mb-3 flex items-center gap-3">
+                  <Icon className="h-5 w-5 shrink-0 text-primary sm:h-6 sm:w-6" />
+                  <div className="text-xs font-black tracking-widest text-primary-foreground">
+                    {item.title}
+                  </div>
                 </div>
+
+                {/* DESCRIPTION */}
                 <div className="text-sm leading-snug text-primary-foreground">
                   {item.desc}
                 </div>
