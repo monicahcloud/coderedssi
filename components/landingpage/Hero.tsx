@@ -45,7 +45,7 @@ const Hero = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="mb-12 w-full max-w-162.5">
+              className="mb-8 w-full max-w-[320px] sm:mb-10 sm:max-w-[320px] md:max-w-[420px] lg:mb-12 lg:max-w-[560px] xl:max-w-[650px]">
               <Image
                 src="/Code_Red_Approved_Logo_Designs.png"
                 alt="Code Red Safe Schools Initiative"
@@ -53,6 +53,7 @@ const Hero = () => {
                 height={860}
                 priority
                 className="h-auto w-full object-contain"
+                sizes="(max-width: 640px) 240px, (max-width: 768px) 320px, (max-width: 1024px) 420px, (max-width: 1280px) 560px, 650px"
               />
             </motion.div>
 
@@ -74,7 +75,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}>
-              <h1 className="mb-6 text-4xl font-black uppercase tracking-tighter text-primary-foreground md:text-4xl xl:text-5xl 2xl:text-6xl">
+              <h1 className="mb-6 text-3xl font-black uppercase tracking-tighter text-primary-foreground md:text-4xl xl:text-5xl 2xl:text-6xl">
                 A coordinated,{" "}
                 <span className="italic text-primary whitespace-nowrap">
                   partner-driven{" "}
