@@ -94,19 +94,19 @@ const Hero = () => {
                 </p>
               </div>
 
-              <p className="mb-10 max-w-xl border-l border-white/10 pl-6 text-lg leading-relaxed text-primary-foreground/70">
+              <p className="mb-10 max-w-xl border-l border-white/10 pl-3 text-lg leading-relaxed text-primary-foreground/70">
                 Code Red helps schools strengthen safety readiness while giving
                 partners a clear path to fund, support, and scale measurable
                 protection across real campuses.
               </p>
             </motion.div>
 
-            <div className="mb-8 flex flex-col gap-4 xl:flex-row xl:items-center">
-              <div className="xl:w-auto">
-                <SchoolCTA className="w-full xl:w-[280px]" />
+            <div className="mb-8 flex flex-col gap-3 sm:gap-4 md:max-w-md xl:max-w-none xl:flex-row xl:items-center">
+              <div className="w-full xl:w-auto">
+                <SchoolCTA className="w-full xl:w-[360px]" />
               </div>
 
-              <div className="xl:w-auto">
+              <div className="w-full xl:w-auto">
                 <PartnerCTA className="w-full xl:w-[280px]" />
               </div>
             </div>

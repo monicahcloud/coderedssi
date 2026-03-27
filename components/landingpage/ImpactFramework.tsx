@@ -118,44 +118,53 @@ export default function ImpactFramework() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
-              className="group relative bg-background p-12 transition-colors duration-500 hover:bg-muted/30">
-              <span className="pointer-events-none absolute right-8 top-4 select-none text-8xl font-bold leading-none text-muted/10">
+              className="group relative flex h-full flex-col bg-background p-6 sm:p-8 lg:p-10 xl:p-12 transition-colors duration-500 hover:bg-muted/30">
+              <span className="pointer-events-none absolute right-4 top-3 select-none text-6xl font-bold leading-none text-muted/10 sm:right-6 sm:top-4 sm:text-7xl lg:right-8 lg:text-8xl">
                 {phase.step}
               </span>
 
-              <div className="relative z-10">
-                <h4 className="mb-6 text-2xl font-bold tracking-tight">
+              <div className="relative z-10 flex h-full flex-col">
+                {/* TITLE */}
+                <h4 className="mb-4 text-xl font-bold tracking-tight sm:mb-5 sm:text-2xl">
                   {phase.title}
                 </h4>
 
-                <p className="mb-8 text-sm italic leading-relaxed text-muted-foreground">
-                  &quot;{phase.description}&quot;
-                </p>
+                {/* DESCRIPTION + TARGET AREA */}
+                <div className="min-h-[240px]">
+                  <p className="mb-5 text-sm leading-relaxed text-muted-foreground">
+                    {phase.description}
+                  </p>
 
-                <p className="mb-8 text-sm italic leading-relaxed text-muted-foreground">
-                  {phase.target}
-                </p>
+                  <p className="text-sm italic leading-relaxed text-muted-foreground">
+                    {phase.target}
+                  </p>
+                </div>
 
-                <ul className="mb-10 space-y-4">
-                  {phase.features.map((feature, i) => (
-                    <li
-                      key={i}
-                      className="flex items-center gap-3 text-xs font-bold uppercase text-foreground/70">
-                      <Plus className="h-3 w-3 text-primary" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
+                {/* FEATURES */}
+                <div className="mt-8 h-40">
+                  <ul className="space-y-4">
+                    {phase.features.map((feature, i) => (
+                      <li
+                        key={i}
+                        className="flex items-start gap-3 text-xs font-bold uppercase text-foreground/70">
+                        <Plus className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
 
-                <div className="border-t border-dashed border-border pt-8">
+                {/* VALUE PROP */}
+                <div className="mt-8 border-t border-dashed border-border pt-6">
+                   
                   <p className="mb-1 text-[10px] font-bold uppercase tracking-widest text-primary">
                     Value Proposition
                   </p>
                   <p className="text-sm font-bold text-foreground">
                     {phase.deliverable}
-                  </p>
+                  </p></div>
                 </div>
-              </div>
+             
             </motion.div>
           ))}
         </div>
