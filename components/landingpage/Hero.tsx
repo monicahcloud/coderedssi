@@ -34,10 +34,10 @@ const IMPACT_POINTS = [
 
 const Hero = () => {
   return (
-    <section className="relative flex min-h-screen items-center overflow-hidden pt-20">
+    <section className="relative flex min-h-screen items-center overflow-hidden pt-20 ">
       <HeroVideoBackground />
 
-      <div className="container relative z-10 mx-auto px-6 py-8 lg:px-8">
+      <div className="container relative z-10 mx-auto px-6 py-8 lg:px-8 ">
         <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr] xl:grid-cols-[1.15fr_0.85fr]">
           <div className="w-full max-w-3xl">
             {/* LEFT COLUMN */}
@@ -75,7 +75,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}>
-              <h1 className="mb-6 text-3xl font-black uppercase tracking-tighter text-primary-foreground md:text-4xl xl:text-5xl 2xl:text-6xl">
+              <h1 className="mb-6 text-2xl font-black uppercase tracking-tighter text-primary-foreground md:text-4xl xl:text-5xl 2xl:text-6xl ">
                 A coordinated,{" "}
                 <span className="italic text-primary whitespace-nowrap">
                   partner-driven{" "}
