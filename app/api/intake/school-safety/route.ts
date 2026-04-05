@@ -41,14 +41,31 @@ export async function POST(req: Request) {
 
     await resend.emails.send({
       from: fromEmail,
+      to: toEmail,
+      replyTo: payload.schoolContact.email,
+      subject: `New School Safety Intake: ${payload.schoolContact.schoolName}`,
+      text: `${buildSchoolEmail(payload)}\n\nIntake ID: ${intakeId}`,
+    });
+
+    await resend.emails.send({
+      from: fromEmail,
       to: payload.schoolContact.email,
       subject: "We received your school safety intake",
-      text: `Thank you, ${payload.schoolContact.contactName}. We received your intake and will follow up soon.`,
+      text: `Hi ${payload.schoolContact.contactName},
+
+Thank you for submitting your school safety intake to Code Red Safer Schools Initiative.
+
+We’ve received your information and a member of our team will review it and follow up with you soon.
+
+Reference ID: ${intakeId}
+
+— Code Red Safer Schools Initiative`,
     });
 
     return NextResponse.json({
       success: true,
       intakeId,
+      message: "School intake submitted successfully.",
     });
   } catch (error) {
     console.error("School intake route error:", error);
