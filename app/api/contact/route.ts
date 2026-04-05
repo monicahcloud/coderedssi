@@ -33,13 +33,18 @@ export async function POST(req: Request) {
     const fromEmail = process.env.CONTACT_FROM_EMAIL;
 
     if (!toEmail || !fromEmail) {
+      console.error("Missing email configuration:", {
+        hasToEmail: Boolean(toEmail),
+        hasFromEmail: Boolean(fromEmail),
+      });
+
       return NextResponse.json(
         { success: false, message: "Email configuration is missing." },
         { status: 500 },
       );
     }
 
-    await resend.emails.send({
+    const adminEmailResult = await resend.emails.send({
       from: fromEmail,
       to: toEmail,
       replyTo: payload.contact.email,
@@ -47,7 +52,21 @@ export async function POST(req: Request) {
       text: buildPartnerEmail(payload),
     });
 
-    await resend.emails.send({
+    console.log("Partner admin email result:", adminEmailResult);
+
+    if ((adminEmailResult as { error?: unknown })?.error) {
+      console.error("Failed sending partner admin email:", adminEmailResult);
+
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Failed to deliver partner inquiry to admin inbox.",
+        },
+        { status: 500 },
+      );
+    }
+
+    const confirmationEmailResult = await resend.emails.send({
       from: fromEmail,
       to: payload.contact.email,
       subject: "We received your partnership inquiry",
@@ -55,10 +74,28 @@ export async function POST(req: Request) {
 
 Thank you for contacting Code Red Safer Schools Initiative.
 
-We’ve received your partnership inquiry and a member of our team will follow up soon.
+We’ve received your partnership inquiry and a member of our team will follow up with you soon.
 
 — Code Red Safer Schools Initiative`,
     });
+
+    console.log("Partner confirmation email result:", confirmationEmailResult);
+
+    if ((confirmationEmailResult as { error?: unknown })?.error) {
+      console.error(
+        "Failed sending partner confirmation email:",
+        confirmationEmailResult,
+      );
+
+      return NextResponse.json(
+        {
+          success: false,
+          message:
+            "Your inquiry was received, but we could not send the confirmation email.",
+        },
+        { status: 500 },
+      );
+    }
 
     return NextResponse.json({
       success: true,
@@ -66,6 +103,7 @@ We’ve received your partnership inquiry and a member of our team will follow u
     });
   } catch (error) {
     console.error("Partner contact route error:", error);
+
     return NextResponse.json(
       { success: false, message: "Failed to send partner submission." },
       { status: 500 },

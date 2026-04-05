@@ -73,7 +73,7 @@ export default function PartnerIntake() {
     },
   });
 
-  const { trigger, handleSubmit, formState } = methods;
+  const { trigger, handleSubmit, formState, reset } = methods;
 
   const fieldsByStep = useMemo<Record<number, string[]>>(
     () => ({
@@ -157,19 +157,27 @@ export default function PartnerIntake() {
 
       const result = await res.json();
 
+      console.log("Partner intake submit result:", result);
+
       if (!res.ok || !result.success) {
         throw new Error(result.message || "Submission failed.");
       }
+
+      reset();
 
       setSubmitStatus({
         type: "success",
         message: "Partner interest submitted successfully.",
       });
     } catch (error) {
-      console.error(error);
+      console.error("Partner intake submit error:", error);
+
       setSubmitStatus({
         type: "error",
-        message: "We couldn't submit the partner intake. Please try again.",
+        message:
+          error instanceof Error
+            ? error.message
+            : "We couldn't submit the partner intake. Please try again.",
       });
     }
   };

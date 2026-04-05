@@ -33,34 +33,77 @@ export async function POST(req: Request) {
     const fromEmail = process.env.CONTACT_FROM_EMAIL;
 
     if (!toEmail || !fromEmail) {
+      console.error("Missing email configuration:", {
+        hasToEmail: Boolean(toEmail),
+        hasFromEmail: Boolean(fromEmail),
+      });
+
       return NextResponse.json(
         { success: false, message: "Email configuration is missing." },
         { status: 500 },
       );
     }
 
-    await resend.emails.send({
+    const adminEmailResult = await resend.emails.send({
       from: fromEmail,
       to: toEmail,
       replyTo: payload.schoolContact.email,
       subject: `New School Safety Intake: ${payload.schoolContact.schoolName}`,
-      text: `${buildSchoolEmail(payload)}\n\nIntake ID: ${intakeId}`,
+      text: `${buildSchoolEmail(payload)}\n\nReference ID: ${intakeId}`,
     });
 
-    await resend.emails.send({
+    console.log("School intake admin email result:", adminEmailResult);
+
+    if ((adminEmailResult as { error?: unknown })?.error) {
+      console.error(
+        "Failed sending school intake admin email:",
+        adminEmailResult,
+      );
+
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Failed to deliver school intake to admin inbox.",
+        },
+        { status: 500 },
+      );
+    }
+
+    const confirmationEmailResult = await resend.emails.send({
       from: fromEmail,
       to: payload.schoolContact.email,
       subject: "We received your school safety intake",
       text: `Hi ${payload.schoolContact.contactName},
 
-Thank you for submitting your school safety intake to Code Red Safer Schools Initiative.
+Thank you for contacting Code Red Safer Schools Initiative.
 
-We’ve received your information and a member of our team will review it and follow up with you soon.
+We’ve received your school safety intake and a member of our team will review it and follow up with you soon.
 
 Reference ID: ${intakeId}
 
 — Code Red Safer Schools Initiative`,
     });
+
+    console.log(
+      "School intake confirmation email result:",
+      confirmationEmailResult,
+    );
+
+    if ((confirmationEmailResult as { error?: unknown })?.error) {
+      console.error(
+        "Failed sending school intake confirmation email:",
+        confirmationEmailResult,
+      );
+
+      return NextResponse.json(
+        {
+          success: false,
+          message:
+            "Your intake was received, but we could not send the confirmation email.",
+        },
+        { status: 500 },
+      );
+    }
 
     return NextResponse.json({
       success: true,
@@ -69,6 +112,7 @@ Reference ID: ${intakeId}
     });
   } catch (error) {
     console.error("School intake route error:", error);
+
     return NextResponse.json(
       { success: false, message: "Failed to send school intake." },
       { status: 500 },

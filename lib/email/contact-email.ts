@@ -1,11 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 type SchoolIntakePayload = Record<string, unknown>;
 type PartnerPayload = Record<string, unknown>;
 
 function pretty(value: unknown): string {
   if (value === null || value === undefined || value === "") return "—";
-  if (Array.isArray(value)) return value.length ? value.join(", ") : "—";
-  if (typeof value === "object") return JSON.stringify(value, null, 2);
+
+  if (Array.isArray(value)) {
+    return value.length ? value.join(", ") : "—";
+  }
+
+  if (typeof value === "object") {
+    return JSON.stringify(value, null, 2);
+  }
+
   return String(value);
 }
 
@@ -46,7 +54,7 @@ Decision
 - Timeline: ${pretty(payload.decision && (payload.decision as any).timeline)}
 - Budget Approved: ${pretty(payload.decision && (payload.decision as any).budgetApproved)}
 - Next Step: ${pretty(payload.decision && (payload.decision as any).nextStep)}
-`;
+`.trim();
 }
 
 export function buildSchoolEmail(payload: SchoolIntakePayload) {
@@ -64,6 +72,7 @@ School Contact
 - State: ${pretty(payload.schoolContact && (payload.schoolContact as any).state)}
 - ZIP: ${pretty(payload.schoolContact && (payload.schoolContact as any).zipCode)}
 - School Type: ${pretty(payload.schoolContact && (payload.schoolContact as any).schoolType)}
+- School Type Other: ${pretty(payload.schoolContact && (payload.schoolContact as any).schoolTypeOther)}
 - Setting: ${pretty(payload.schoolContact && (payload.schoolContact as any).schoolSetting)}
 - Enrollment: ${pretty(payload.schoolContact && (payload.schoolContact as any).enrollment)}
 - Contact Name: ${pretty(payload.schoolContact && (payload.schoolContact as any).contactName)}
@@ -91,12 +100,13 @@ Systems Resources
 - Drill Frequency: ${pretty(payload.systemsResources && (payload.systemsResources as any).drillFrequency)}
 - Mental Health Support: ${pretty(payload.systemsResources && (payload.systemsResources as any).mentalHealthSupport)}
 - First Responder Relationship: ${pretty(payload.systemsResources && (payload.systemsResources as any).firstResponderRelationship)}
+- Staff Training Level: ${pretty(payload.systemsResources && (payload.systemsResources as any).staffTrainingLevel)}
 
 Physical Security
 - Entry Procedure: ${pretty(payload.systemsResources && (payload.systemsResources as any).physicalSecurity?.entryProcedure)}
 - Security Features: ${pretty(payload.systemsResources && (payload.systemsResources as any).physicalSecurity?.securityFeatures)}
 - Has Vulnerabilities: ${pretty(payload.systemsResources && (payload.systemsResources as any).physicalSecurity?.hasVulnerabilities)}
-- Vulnerability Details: ${pretty(payload.systemsResources && (payload.systemsResources as any).vulnerabilitiesDescription)}
+- Vulnerability Details: ${pretty(payload.systemsResources && (payload.systemsResources as any).physicalSecurity?.vulnerabilitiesDescription)}
 
 Capacity / Barriers
 - Implementation Capacity: ${pretty(payload.capacityBarriers && (payload.capacityBarriers as any).implementationCapacity)}
@@ -109,5 +119,5 @@ Services
 - Other Support: ${pretty(payload.services && (payload.services as any).supportTypesOther)}
 - Preferred Timeframe: ${pretty(payload.services && (payload.services as any).preferredTimeframe)}
 - Additional Information: ${pretty(payload.services && (payload.services as any).additionalInformation)}
-`;
+`.trim();
 }

@@ -155,6 +155,8 @@ export default function SchoolSafetyIntake() {
 
       const result = await res.json();
 
+      console.log("School intake submit result:", result);
+
       if (!res.ok || !result.success) {
         throw new Error(result.message || "Submission failed.");
       }
@@ -165,13 +167,17 @@ export default function SchoolSafetyIntake() {
 
       setSubmitStatus({
         type: "success",
-        message: `Intake submitted successfully. Intake ID: ${result.intakeId}`,
+        message: `Intake submitted successfully. Reference ID: ${result.intakeId}`,
       });
     } catch (error) {
-      console.error(error);
+      console.error("School intake submit error:", error);
+
       setSubmitStatus({
         type: "error",
-        message: "We couldn't submit the intake. Please try again.",
+        message:
+          error instanceof Error
+            ? error.message
+            : "We couldn't submit the intake. Please try again.",
       });
     }
   };
@@ -184,10 +190,12 @@ export default function SchoolSafetyIntake() {
           <p className="mt-3 text-white/70">
             Your intake has been received. We’ll be in touch shortly.
           </p>
+          <p className="mt-2 text-sm text-white/50">{submitStatus.message}</p>
         </div>
       </div>
     );
   }
+
   return (
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
